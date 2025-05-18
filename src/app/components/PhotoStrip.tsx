@@ -23,8 +23,6 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
       '/photos/peak1.jpg',
     ],
     angle = 7,
-    width = '100vw',
-    height = '400px',
     itemWidth = '350px',
     itemHeight = '275px',
     borderRadius = '12px',

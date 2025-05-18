@@ -5,7 +5,9 @@ export default function Hero() {
     <section className="relative flex h-[75vh] items-center justify-center px-6 bg-white font-sans">
       <div className="inline-flex flex-col md:flex-row items-start md:items-center gap-12">
         <div className="flex flex-col items-start">
-          <span className="text-xl text-gray-600 mb-0">Hi, I'm</span>
+        <span className="text-xl text-gray-600 mb-0">
+        {"Hi, I'm"}
+        </span>
           <span className="text-8xl md:text-8.5xl font-semibold text-gray-900 leading-[0.9]">
             Ashton
           </span>
@@ -14,11 +16,10 @@ export default function Hero() {
           </span>
         </div>
 
-        <p className="text-lg text-gray-600 max-w-md">
-          I'm a business & data-science at the University of Washington. I am passionate for creative UI
-          design, photography, and new experiences. This is a space where I get to experiment and showcase
-          my some photos and a project of two :)
-        </p>
+    <p className="text-lg text-gray-600 max-w-md">
+    {"I'm a business & data-science student at the University of Washington. I am passionate about creative UI design, photography, and new experiences. This is a space where I get to experiment and showcase a few photos and a project or two :)"}
+    </p>
+
       </div>
     </section>
   );

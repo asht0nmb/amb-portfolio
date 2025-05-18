@@ -20,7 +20,7 @@ export default function ProjectCard({
   generalTags = ["AI", "Health", "Personal"],
   techTags = ["Pandas", "scikit-learn", "React", "TypeScript", "TailwindCSS"],
   status = "in-progress",
-  collaborators = 1,
+  // collaborators = 1,
   lastUpdated = "today",
   previewImage
 }: ProjectCardProps) {
