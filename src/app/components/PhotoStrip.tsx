@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+
 
 interface DiagonalCarouselProps {
   images?: string[];
@@ -35,7 +37,8 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
     const animationRef = useRef<number>(0);
     const offsetRef = useRef<number>(0);
     const [windowWidth, setWindowWidth] = useState<number>(0);
-    const [imageSetWidth, setImageSetWidth] = useState<number>(0);
+    const [, setImageSetWidth] = useState<number>(0);
+    // const [imageSetWidth, setImageSetWidth] = useState<number>(0);
 
     // Track window width for full-width calculations
     useEffect(() => {
@@ -173,7 +176,7 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
                     pointerEvents: 'auto',
                   }}
                 >
-                  <img
+                  <Image
                     src={src}
                     alt={`carousel-item-${idx}`}
                     className="diagonal-carousel-image"

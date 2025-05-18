@@ -32,7 +32,7 @@ export default function NowCard({ images = [] }: NowCardProps) {
             <div className="mb-6 transition-transform duration-500 ease-out group-hover:translate-x-1">
               <h2 className="text-3xl font-semibold mb-3 tracking-tight">Now</h2>
               <p className="text-black/60 text-lg">
-                See what I'm up to at the moment
+              <p>{"See what I'm up to at the moment"}</p>
               </p>
             </div>
 
