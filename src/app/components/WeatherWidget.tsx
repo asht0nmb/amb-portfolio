@@ -11,7 +11,6 @@ import {
   WiDayThunderstorm, WiNightThunderstorm,
   WiDayShowers, WiNightShowers,
   WiDaySleet, WiNightSleet,
-  WiRainMix
 } from 'react-icons/wi';
 
 interface WeatherData {
