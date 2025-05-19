@@ -10,24 +10,44 @@ export default function CustomCursor() {
   const [hasPointer, setHasPointer] = useState(false);
 
   useEffect(() => {
+    // Debug logging
+    console.log('CustomCursor mounted');
+    
     // Check if we have a fine pointer device using pointer media query
     const mediaQuery = window.matchMedia('(pointer: fine)');
-    setHasPointer(mediaQuery.matches);
+    const isPointerFine = mediaQuery.matches;
+    console.log('Pointer detection:', { isPointerFine });
+    setHasPointer(isPointerFine);
 
     // Listen for changes in pointer device
     const handlePointerChange = (e: MediaQueryListEvent) => {
+      console.log('Pointer device changed:', { matches: e.matches });
       setHasPointer(e.matches);
     };
     mediaQuery.addEventListener('change', handlePointerChange);
 
     const updatePosition = (e: PointerEvent) => {
-      // Only update for mouse or pen input
+      console.log('Pointer event:', { 
+        type: e.pointerType,
+        x: e.clientX,
+        y: e.clientY
+      });
+      
       if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
         requestAnimationFrame(() => {
           setPosition({ x: e.clientX, y: e.clientY });
         });
       }
     };
+
+    // Debug initial pointer state
+    console.log('Initial pointer state:', {
+      navigator: {
+        maxTouchPoints: navigator.maxTouchPoints,
+        pointerEnabled: 'PointerEvent' in window,
+        touchEnabled: 'ontouchstart' in window
+      }
+    });
 
     const handlePointerEnter = (e: PointerEvent) => {
       if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
@@ -70,7 +90,10 @@ export default function CustomCursor() {
   }, []);
 
   // Don't render if we don't have a fine pointer device
-  if (!hasPointer) return null;
+  if (!hasPointer) {
+    console.log('Not rendering cursor - no fine pointer detected');
+    return null;
+  }
 
   return (
     <>
