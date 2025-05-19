@@ -13,7 +13,7 @@ This project was built using:
 
 ## Features
 
-Photo gallery, check out my [unsplash](https://unsplash.com/@ashtonmb)
+Photo gallery - check out my [unsplash](https://unsplash.com/@ashtonmb).
 
 In Progress:
 - Interactive about page
