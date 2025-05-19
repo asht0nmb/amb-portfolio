@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface PortfolioCardProps {
   title?: string;
@@ -25,6 +26,7 @@ export default function PortfolioCard({
   previewImage
 }: PortfolioCardProps) {
   const [isBlinking, setIsBlinking] = useState(true);
+  const router = useRouter();
 
   // Blink effect for status indicator
   useEffect(() => {
@@ -34,20 +36,25 @@ export default function PortfolioCard({
     return () => clearInterval(interval);
   }, []);
 
+  const handleClick = () => {
+    router.push('/workspace');
+  };
+
   return (
     <div 
-      className="project-card relative bg-white/80 backdrop-blur-sm rounded-3xl p-10 shadow-sm 
+      onClick={handleClick}
+      className="project-card relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-10 shadow-sm 
         w-full transition-all duration-500 ease-out 
         hover:shadow-xl hover:-translate-y-1 hover:bg-white/90
-        group"
+        group cursor-pointer"
       style={{ cursor: 'none' }}
     >
-      <div className="flex gap-12 items-center">
+      <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 lg:items-center">
         {/* Left: Content */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 lg:max-w-[60%]">
           {/* Status Indicator */}
-          <div className="inline-flex items-center gap-2 bg-black/5 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6
-            transition-all duration-500 ease-out group-hover:bg-black/10">
+          <div className="inline-flex items-center gap-2 bg-black/5 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 mb-4 sm:mb-6
+            transition-colors duration-500 ease-out group-hover:bg-black/10">
             <div 
               className={`w-2.5 h-2.5 rounded-full transition-colors duration-500
                 ${status === 'in-progress' ? 
@@ -61,20 +68,20 @@ export default function PortfolioCard({
           </div>
 
           {/* Header */}
-          <div className="mb-6 transition-transform duration-500 ease-out group-hover:translate-x-1">
-            <h2 className="text-3xl font-semibold mb-3 tracking-tight">{title}</h2>
-            <p className="text-black/60 text-lg">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-2 sm:mb-3 tracking-tight">{title}</h2>
+            <p className="text-black/60 text-base sm:text-lg">
               {description}
             </p>
           </div>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-6 transition-transform duration-500 ease-out group-hover:translate-x-1">
+          <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
             {/* General tags - light blue */}
             {generalTags.map((tag, index) => (
               <span 
                 key={`general-${index}`}
-                className="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-full text-sm font-medium
+                className="bg-blue-50 text-blue-600 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-sm font-medium
                   transition-colors duration-500 ease-out group-hover:bg-blue-100"
               >
                 {tag}
@@ -84,7 +91,7 @@ export default function PortfolioCard({
             {techTags.map((tag, index) => (
               <span 
                 key={`tech-${index}`}
-                className="bg-black/5 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium
+                className="bg-black/5 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-sm font-medium
                   transition-colors duration-500 ease-out group-hover:bg-black/10"
               >
                 {tag}
@@ -93,11 +100,11 @@ export default function PortfolioCard({
           </div>
 
           {/* Footer */}
-          <div className="flex items-center gap-6 transition-transform duration-500 ease-out group-hover:translate-x-1">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <div className="flex items-center gap-2 sm:gap-3">
               <div className="flex -space-x-2">
                 <div 
-                  className="w-8 h-8 rounded-full bg-black/10 backdrop-blur-sm border-2 border-white
+                  className="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-black/10 backdrop-blur-sm border-2 border-white
                     transition-colors duration-500 ease-out group-hover:bg-black/15"
                 />
               </div>
@@ -113,23 +120,22 @@ export default function PortfolioCard({
         </div>
 
         {/* Right: Preview */}
-        <div className="relative w-[300px] h-[280px] bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden
-          transition-all duration-500 ease-out group-hover:bg-black/10">
+        <div className="relative w-full lg:w-[35%] h-[180px] sm:h-[200px] lg:h-[260px] bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden
+          transition-colors duration-500 ease-out group-hover:bg-black/10 lg:min-w-[250px]">
           {previewImage ? (
             <Image
               src={previewImage}
               alt={`Preview of ${title}`}
               fill
               className="object-cover"
-              sizes="300px"
+              sizes="(max-width: 1024px) 100vw, 35vw"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center
-              transition-transform duration-500 ease-out group-hover:scale-[1.02]">
-              <div className="text-black/40 text-lg flex flex-col items-center gap-4">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-black/40 text-base sm:text-lg flex flex-col items-center gap-4">
                 <svg 
-                  width="32" 
-                  height="32" 
+                  width="28"
+                  height="28"
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor" 

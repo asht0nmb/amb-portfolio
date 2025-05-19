@@ -1,49 +1,73 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import NavProgress from './NavProgress';
+import WeatherWidget from './WeatherWidget';
 
 const navLinks = [
-  { name: 'Work', href: '/work' },
-  { name: 'Photography', href: '/photography' },
   { name: 'About', href: '/about' },
+  { name: 'Workspace', href: '/workspace' },
+  { name: 'Gallery', href: '/gallery' },
 ];
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      }));
+    };
+
+    // Update immediately
+    updateTime();
+    
+    // Update every second
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
   return (
     <>
-      <nav className="fixed inset-x-0 top-0 h-16 flex items-center justify-between px-6 backdrop-blur-sm bg-white/5 z-50">
+      <nav className="fixed inset-x-0 top-0 h-16 flex items-center justify-between px-6 z-50">
         {/* Left: Logo Section */}
-        <div className="w-32 flex items-center">
+        <div className={`w-32 flex items-center transition-all duration-700 ease-in-out transform ${
+          isScrolled ? 'opacity-0 -translate-y-8' : 'opacity-100 translate-y-0'
+        }`}>
           <Link href="/" className="relative flex items-center" onClick={closeMenu}>
-            <div className="w-8 h-8 bg-gray-200/20 rounded-lg flex items-center justify-center">
-              {/* Placeholder for logo - replace with Image component when ready */}
-              <span className="text-sm font-medium">amb</span>
-            </div>
+            <Image
+              src="/photos/logos/amb1.png"
+              alt="AMB Logo"
+              width={82}
+              height={82}
+              className="rounded-lg"
+            />
           </Link>
         </div>
 
-        {/* Center: Navigation Links - Desktop */}
-        <div className="hidden md:flex justify-center items-center gap-12">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="group relative text-base font-medium tracking-wide py-1"
-              style={{ cursor: 'none' }}
-            >
-              <span className="relative">
-                {link.name}
-                <span className="absolute left-0 top-full mt-0.5 h-[2px] w-0 bg-blue-500 group-hover:w-full transition-all duration-300 ease-out" />
-              </span>
-            </Link>
-          ))}
-        </div>
+        {/* Center: Navigation Progress - Desktop */}
+        <NavProgress links={navLinks} />
 
         {/* Center: Mobile Menu Button */}
         <div className="md:hidden flex justify-center items-center">
@@ -71,11 +95,13 @@ export default function NavBar() {
           </button>
         </div>
 
-        {/* Right: Widget Area */}
-        <div className="w-32 flex justify-end">
-          <div className="px-3 py-1.5 rounded-md bg-gray-200/20 text-sm">
-            {/* Placeholder for weather/time widget */}
-            <span className="text-sm">Widget</span>
+        {/* Right: Time and Weather Widget */}
+        <div className={`w-32 flex justify-end items-center gap-4 transition-all duration-700 ease-in-out transform ${
+          isScrolled ? 'opacity-0 translate-y-[-2rem]' : 'opacity-100 translate-y-0'
+        }`}>
+          <WeatherWidget />
+          <div className="text-sm font-medium text-neutral-800">
+            {time}
           </div>
         </div>
       </nav>
@@ -92,7 +118,7 @@ export default function NavBar() {
               key={link.name}
               href={link.href}
               onClick={closeMenu}
-              className="text-3xl font-medium tracking-wide py-3 transition-colors hover:text-blue-500"
+              className="text-3xl text-neutral-600 hover:text-neutral-900 transition-all duration-300 ease-out cursor-none"
             >
               {link.name}
             </Link>

@@ -17,7 +17,7 @@ export default function Hero() {
         </div>
 
     <p className="text-lg text-gray-600 max-w-md">
-    {"I'm a business & data-science student at the University of Washington. I am passionate about creative UI design, photography, and new experiences. This is a space where I get to experiment and showcase a few photos and a project or two :)"}
+    {"I'm a business & data-science student studying at the University of Washington. I'm passionate about creative UI design, photography, and any or all new experiences. This is a space where I get to experiment, showcase a few photos, and highlight a project or two :)"}
     </p>
 
       </div>

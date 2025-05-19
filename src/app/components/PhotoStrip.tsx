@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-
+import { useRouter } from 'next/navigation';
 
 interface DiagonalCarouselProps {
   images?: string[];
@@ -38,7 +38,6 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
     const offsetRef = useRef<number>(0);
     const [windowWidth, setWindowWidth] = useState<number>(0);
     const [, setImageSetWidth] = useState<number>(0);
-    // const [imageSetWidth, setImageSetWidth] = useState<number>(0);
 
     // Track window width for full-width calculations
     useEffect(() => {
@@ -64,7 +63,7 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
     useEffect(() => {
       let lastTime = performance.now();
       const baseSpeed = 0.05;
-      const resetThreshold = -windowWidth * 1.5; // Reset point well beyond visible area
+      const stripWidth = images.length * (parseInt(itemWidth) + 20 * 2)
       
       const animate = (currentTime: number) => {
         const deltaTime = currentTime - lastTime;
@@ -74,10 +73,8 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
         const speed = isHovered ? baseSpeed * 0.35 : baseSpeed;
         offsetRef.current -= speed * deltaTime;
 
-        // Reset when we're far enough along that the reset won't be visible
-        if (offsetRef.current <= resetThreshold) {
-          // Jump back by one screen width to maintain continuity
-          offsetRef.current += windowWidth;
+        if (offsetRef.current <= -stripWidth) {
+          offsetRef.current += stripWidth;
         }
         
         if (carouselRef.current) {
@@ -94,10 +91,10 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
           cancelAnimationFrame(animationRef.current);
         }
       };
-    }, [isHovered, windowWidth]); // Keep dependencies minimal and stable
+    }, [isHovered, windowWidth, images.length, itemWidth]); // Keep dependencies minimal and stable
 
     // Create enough copies to fill several screen widths for smooth transition
-    const loopImages = Array(8).fill(images).flat();
+    const loopImages = [...images, ...images];
 
     return (
       <div
@@ -152,7 +149,6 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
                 transform: 'translateX(0)',
                 willChange: 'transform',
                 width: 'max-content',
-                transition: 'transform 0.3s ease-out',
                 pointerEvents: 'auto',
               }}
             >
@@ -179,6 +175,8 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
                   <Image
                     src={src}
                     alt={`carousel-item-${idx}`}
+                    width={400}
+                    height={400}
                     className="diagonal-carousel-image"
                     style={{
                       width: '100%',
@@ -198,4 +196,12 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
     );
   };
   
-export default DiagonalCarousel;
+export default function PhotoStrip() {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/gallery');
+  };
+
+  return <DiagonalCarousel onClick={handleClick} />;
+}

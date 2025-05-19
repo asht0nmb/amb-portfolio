@@ -1,108 +1,107 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+type ImagePosition = 'top-right' | 'bottom-left' | 'center-right' | 'bottom-right';
+
 interface NowCardProps {
   images?: {
     src: string;
-    alt: string;
+    alt?: string;
+    position: ImagePosition;
   }[];
 }
 
-export default function NowCard({ images = [] }: NowCardProps) {
+const defaultImages = [
+  {
+    src: '/photos/now/nudge.jpg',
+    position: 'top-right' as const,
+    alt: 'Book cover'
+  },
+  {
+    src: '/photos/now/beatles_help.webp',
+    position: 'bottom-left' as const,
+    alt: 'Beatles album'
+  },
+  {
+    src: '/photos/now/camera.png',
+    position: 'center-right' as const,
+    alt: 'Camera illustration'
+  },
+  {
+    src: '/photos/now/run.webp',
+    position: 'bottom-right' as const,
+    alt: 'Running illustration'
+  }
+];
+
+export default function NowCard({ images = defaultImages }: NowCardProps) {
+  const getPositionClasses = (position: ImagePosition) => {
+    switch (position) {
+      case 'top-right':
+        return 'absolute right-[40%] top-[65%] w-[13.5vw] h-[18vw] sm:w-[8.8vw] sm:h-[12vw] lg:w-[8.5vw] lg:h-[13vw] transform transition-transform group-hover:scale-105 rotate-2';
+      case 'bottom-left':
+        return 'absolute right-[15%] bottom-[5%] w-[18vw] h-[18vw] sm:w-[15vw] sm:h-[15vw] lg:w-[12vw] lg:h-[12vw] transform transition-transform group-hover:scale-105 -rotate-3';
+      case 'center-right':
+        return 'absolute right-[25%] top-[15%] w-[10vw] h-[10vw] sm:w-[8vw] sm:h-[8vw] lg:w-[7vw] lg:h-[7vw] transform transition-transform group-hover:scale-105 rotate-6';
+      case 'bottom-right':
+        return 'absolute right-[5%] top-[5%] w-[12vw] h-[12vw] sm:w-[10vw] sm:h-[10vw] lg:w-[8vw] lg:h-[8vw] transform transition-transform group-hover:scale-105 -rotate-2';
+      default:
+        return '';
+    }
+  };
+
   return (
     <Link 
       href="/about"
       className="block w-full transition-all duration-500 ease-out group"
       style={{ cursor: 'none' }}
     >
-      <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-10 shadow-sm 
+      <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-10 shadow-sm 
         transition-all duration-500 ease-out 
-        hover:shadow-xl hover:-translate-y-1 hover:bg-white/90">
-        <div className="flex gap-12 items-center h-full">
-          {/* Left: Content */}
-          <div className="flex-1 min-w-0">
-            {/* Header */}
-            <div className="inline-flex items-center gap-2 bg-black/5 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6
-              transition-all duration-500 ease-out group-hover:bg-black/10">
-              <span className="text-sm font-medium text-black/70">
-                Currently
-              </span>
-            </div>
-
-            <div className="mb-6 transition-transform duration-500 ease-out group-hover:translate-x-1">
-              <h2 className="text-3xl font-semibold mb-3 tracking-tight">Now</h2>
-              <p className="text-black/60 text-lg">
-              <p>{"See what I'm up to at the moment"}</p>
+        hover:shadow-xl hover:-translate-y-1 hover:bg-white/90
+        bg-gradient-to-br from-blue-50/50 to-transparent
+        min-h-[280px] sm:min-h-[320px] lg:min-h-[360px] overflow-hidden">
+        <div className="flex flex-col h-full relative">
+          <div className="flex-1 min-w-0 relative z-10 max-w-[60%]">
+            <div className="mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl font-semibold mb-2 sm:mb-3 tracking-tight">Now</h2>
+              <p className="text-black/60 text-base sm:text-lg">
+                {"See what I'm up to at the moment"}
               </p>
             </div>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-6 transition-transform duration-500 ease-out group-hover:translate-x-1">
+            <div className="flex flex-wrap gap-2">
               <span 
-                className="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-full text-sm font-medium
+                className="bg-blue-50 text-blue-600 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-sm font-medium
                   transition-colors duration-500 ease-out group-hover:bg-blue-100"
               >
                 Life
               </span>
               <span 
-                className="bg-black/5 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium
+                className="bg-black/5 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-sm font-medium
                   transition-colors duration-500 ease-out group-hover:bg-black/10"
               >
                 Updates
               </span>
             </div>
-
-            {/* Footer */}
-            <div className="flex items-center gap-6 transition-transform duration-500 ease-out group-hover:translate-x-1">
-              <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                <span className="text-sm text-black/60">Updated daily</span>
-              </div>
-            </div>
           </div>
 
-          {/* Right: Image Strip */}
-          <div className="relative w-[300px] h-[280px] bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden
-            transition-all duration-500 ease-out group-hover:bg-black/10">
-            {images && images.length > 0 ? (
-              <div className="grid grid-cols-2 gap-2 p-2 h-full">
-                {images.map((image, index) => (
-                  <div 
-                    key={index}
-                    className="relative rounded-xl overflow-hidden bg-black/5 backdrop-blur-sm"
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover"
-                      sizes="150px"
-                    />
-                  </div>
-                ))}
+          {/* Decorative Images */}
+          <div className="absolute inset-0 pointer-events-none">
+            {images.map((image, index) => (
+              <div 
+                key={index}
+                className={getPositionClasses(image.position)}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt || ''}
+                  fill
+                  className="object-cover rounded-xl transition-opacity duration-500 opacity-80 group-hover:opacity-100"
+                  sizes="(max-width: 640px) 120px, (max-width: 1024px) 160px, 180px"
+                />
               </div>
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center
-                transition-transform duration-500 ease-out group-hover:scale-[1.02]">
-                <div className="text-black/40 text-lg flex flex-col items-center gap-4">
-                  <svg 
-                    width="32" 
-                    height="32" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    className="transition-transform duration-500 ease-out group-hover:scale-110"
-                  >
-                    <path d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z"/>
-                    <path d="M8 12L16 12M16 12L12 8M16 12L12 16"/>
-                  </svg>
-                  <span>Photos Coming Soon</span>
-                </div>
-              </div>
-            )}
+            ))}
           </div>
         </div>
       </div>

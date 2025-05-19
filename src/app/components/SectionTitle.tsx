@@ -10,7 +10,7 @@ export default function SectionTitle({ title }: SectionTitleProps) {
   return (
     <div className="w-full max-w-[85vw] mx-auto mb-12">
       <Link 
-        href="/work" 
+        href="/workspace" 
         className="section-title inline-flex items-center gap-3"
         style={{ cursor: 'none' }}
       >

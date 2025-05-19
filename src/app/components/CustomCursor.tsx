@@ -128,10 +128,10 @@ export default function CustomCursor() {
           position: 'fixed',
           left: position.x,
           top: position.y,
-          width: '32px',
-          height: '32px',
-          backgroundColor: 'white',
-          borderRadius: '50%',
+          width: '73px',
+          height: '41px',
+          backgroundColor: 'black',
+          borderRadius: '30px',
           pointerEvents: 'none',
           zIndex: 9999,
           display: 'flex',
@@ -156,7 +156,7 @@ export default function CustomCursor() {
         >
           <path 
             d="M4 12h12M16 12l-4 -4M16 12l-4 4" 
-            stroke="black" 
+            stroke="white" 
             strokeWidth="2.5" 
             strokeLinecap="round" 
             strokeLinejoin="round"
