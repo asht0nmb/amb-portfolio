@@ -7,67 +7,70 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isOverGallery, setIsOverGallery] = useState(false);
   const [isOverCustom, setIsOverCustom] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [hasPointer, setHasPointer] = useState(false);
 
   useEffect(() => {
-    // Check if device has touch capability
-    const checkTouchDevice = () => {
-      setIsTouchDevice(
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0
-      );
+    // Check if we have a fine pointer device using pointer media query
+    const mediaQuery = window.matchMedia('(pointer: fine)');
+    setHasPointer(mediaQuery.matches);
+
+    // Listen for changes in pointer device
+    const handlePointerChange = (e: MediaQueryListEvent) => {
+      setHasPointer(e.matches);
     };
+    mediaQuery.addEventListener('change', handlePointerChange);
 
-    // Check initially
-    checkTouchDevice();
-
-    // Also check on resize in case of device mode changes
-    window.addEventListener('resize', checkTouchDevice);
-
-    const updatePosition = (e: MouseEvent) => {
-      requestAnimationFrame(() => {
-        setPosition({ x: e.clientX, y: e.clientY });
-      });
-    };
-
-    const handleMouseEnter = () => setIsVisible(true);
-    const handleMouseLeave = () => setIsVisible(false);
-
-    // Handle hover states
-    const handleHover = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      
-      // Find the closest interactive parent, including elements inside pointer-events-none containers
-      const galleryParent = target.closest('.diagonal-carousel-container');
-      const customParent = target.closest('.project-card') || target.closest('a.section-title');
-      
-      setIsOverGallery(galleryParent !== null);
-      setIsOverCustom(customParent !== null);
-    };
-
-    // Only add mouse events if not a touch device
-    if (!isTouchDevice) {
-      window.addEventListener('mousemove', updatePosition, { passive: true });
-      window.addEventListener('mouseover', handleHover, { passive: true });
-      document.addEventListener('mouseenter', handleMouseEnter);
-      document.addEventListener('mouseleave', handleMouseLeave);
-      // Set visible immediately on desktop
-      setIsVisible(true);
-    }
-
-    return () => {
-      window.removeEventListener('resize', checkTouchDevice);
-      if (!isTouchDevice) {
-        window.removeEventListener('mousemove', updatePosition);
-        window.removeEventListener('mouseover', handleHover);
-        document.removeEventListener('mouseenter', handleMouseEnter);
-        document.removeEventListener('mouseleave', handleMouseLeave);
+    const updatePosition = (e: PointerEvent) => {
+      // Only update for mouse or pen input
+      if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+        requestAnimationFrame(() => {
+          setPosition({ x: e.clientX, y: e.clientY });
+        });
       }
     };
-  }, [isTouchDevice]);
 
-  // Don't render anything on touch devices
-  if (isTouchDevice) return null;
+    const handlePointerEnter = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+        setIsVisible(true);
+      }
+    };
+
+    const handlePointerLeave = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+        setIsVisible(false);
+      }
+    };
+
+    // Handle hover states
+    const handleHover = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+        const target = e.target as HTMLElement;
+        
+        // Find the closest interactive parent
+        const galleryParent = target.closest('.diagonal-carousel-container');
+        const customParent = target.closest('.project-card') || target.closest('a.section-title');
+        
+        setIsOverGallery(galleryParent !== null);
+        setIsOverCustom(customParent !== null);
+      }
+    };
+
+    window.addEventListener('pointermove', updatePosition, { passive: true });
+    window.addEventListener('pointerover', handleHover, { passive: true });
+    document.addEventListener('pointerenter', handlePointerEnter);
+    document.addEventListener('pointerleave', handlePointerLeave);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handlePointerChange);
+      window.removeEventListener('pointermove', updatePosition);
+      window.removeEventListener('pointerover', handleHover);
+      document.removeEventListener('pointerenter', handlePointerEnter);
+      document.removeEventListener('pointerleave', handlePointerLeave);
+    };
+  }, []);
+
+  // Don't render if we don't have a fine pointer device
+  if (!hasPointer) return null;
 
   return (
     <>
