@@ -2,6 +2,8 @@ import type { ReactNode } from 'react';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import ClientLayout from '@/app/components/ClientLayout';
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,6 +21,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <ClientLayout>
           {children}
+          <Analytics />
+          <SpeedInsights />
         </ClientLayout>
       </body>
     </html>
