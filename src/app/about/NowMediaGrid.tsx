@@ -1,10 +1,23 @@
 "use client";
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { getTopArtists, getTopTracks } from '../utils/spotify';
 
+interface SpotifyArtist {
+  id: string;
+  name: string;
+  images: { url: string }[];
+}
+
+interface SpotifyTrack {
+  id: string;
+  name: string;
+  album: { images: { url: string }[] };
+}
+
 export default function NowMediaGrid() {
-  const [artists, setArtists] = useState<any[]>([]);
-  const [tracks, setTracks] = useState<any[]>([]);
+  const [artists, setArtists] = useState<SpotifyArtist[]>([]);
+  const [tracks, setTracks] = useState<SpotifyTrack[]>([]);
 
   useEffect(() => {
     async function fetchSpotify() {
@@ -13,7 +26,7 @@ export default function NowMediaGrid() {
         setArtists(artistData.items || []);
         const trackData = await getTopTracks();
         setTracks(trackData.items || []);
-      } catch (e) {
+      } catch {
         setArtists([]);
         setTracks([]);
       }
@@ -32,7 +45,7 @@ export default function NowMediaGrid() {
             {artists.length > 0 ? (
               artists.map((artist) => (
                 <div key={artist.id} className="flex flex-col items-center w-20">
-                  <img src={artist.images?.[0]?.url} alt={artist.name} className="w-16 h-16 rounded-full object-cover mb-1" />
+                  <Image src={artist.images?.[0]?.url || '/placeholder.png'} alt={artist.name} width={64} height={64} className="w-16 h-16 rounded-full object-cover mb-1" />
                   <span className="text-xs text-gray-700 text-center truncate w-full">{artist.name}</span>
                 </div>
               ))
@@ -48,7 +61,7 @@ export default function NowMediaGrid() {
             {tracks.length > 0 ? (
               tracks.map((track) => (
                 <div key={track.id} className="flex flex-col items-center w-20">
-                  <img src={track.album?.images?.[0]?.url} alt={track.name} className="w-16 h-16 rounded object-cover mb-1" />
+                  <Image src={track.album?.images?.[0]?.url || '/placeholder.png'} alt={track.name} width={64} height={64} className="w-16 h-16 rounded object-cover mb-1" />
                   <span className="text-xs text-gray-700 text-center truncate w-full">{track.name}</span>
                 </div>
               ))

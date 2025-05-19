@@ -10,13 +10,13 @@ export default function AboutHero() {
           <h2 className="text-xl font-semibold text-gray-500 mb-2 tracking-widest uppercase">/ Background</h2>
           <div className="w-full min-h-[100px] py-4 mb-6">
             <span className="text-base font-light text-gray-700 leading-relaxed block text-left">
-              I grew up in Port Townsend, WA and didn't know what UI meant until 2024. I've learned a lot since then, and intend to continue. My favorite ways to learn are traveling, reading, and trying.
+              I grew up in Port Townsend, WA and didn&#39;t know what UI meant until 2024. I&#39;ve learned a lot since then, and intend to continue. My favorite ways to learn are traveling, reading, and trying.
             </span>
           </div>
           <h2 className="text-xl font-semibold text-gray-500 mb-2 tracking-widest uppercase">/ Now</h2>
           <div className="w-full min-h-[80px] py-4 mb-2">
             <span className="text-base font-light text-gray-700 leading-relaxed block text-left">
-              Currently, I'm focused on learning as much as possible, particularly from my mentors @ JulyAI and the many book recommendations on my list. My aim is to collect experiences in the pursuit of making my next product or project better than the last.
+              Currently, I&#39;m focused on learning as much as possible, particularly from my mentors @ JulyAI, and a long list of book recommendations. My aim is to collect experiences in the pursuit of making my next product or project better than the last.
             </span>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default function AboutHero() {
             />
           </div>
           <div className="text-sm text-gray-500 text-center px-2">
-            Mt. Lawrence Grassi, Kananaskis, BC, Canada | 7,897' | 03/26/25
+            Summit of Mount Awesome, 2023
           </div>
         </div>
       </div>
