@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import BrowserMockup from './BrowserMockup';
 
 interface PortfolioCardProps {
   title?: string;
@@ -43,7 +43,7 @@ export default function PortfolioCard({
   return (
     <div 
       onClick={handleClick}
-      className="project-card relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-10 shadow-sm 
+      className="project-card relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-8 shadow-sm 
         w-full transition-all duration-500 ease-out 
         hover:shadow-xl hover:-translate-y-1 hover:bg-white/90
         group cursor-pointer"
@@ -120,18 +120,15 @@ export default function PortfolioCard({
         </div>
 
         {/* Right: Preview */}
-        <div className="relative w-full lg:w-[35%] h-[180px] sm:h-[200px] lg:h-[260px] bg-black/5 backdrop-blur-sm rounded-2xl overflow-hidden
-          transition-colors duration-500 ease-out group-hover:bg-black/10 lg:min-w-[250px]">
+        <div className="relative w-full lg:w-[360px] h-[200px] sm:h-[220px] lg:h-[260px] overflow-visible
+          transition-all duration-500 ease-out lg:min-w-[280px] pt-2">
           {previewImage ? (
-            <Image
-              src={previewImage}
+            <BrowserMockup
+              imageUrl={previewImage}
               alt={`Preview of ${title}`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 35vw"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/5 backdrop-blur-sm rounded-2xl">
               <div className="text-black/40 text-base sm:text-lg flex flex-col items-center gap-4">
                 <svg 
                   width="28"

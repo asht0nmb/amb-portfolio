@@ -4,11 +4,26 @@ import { useEffect, useState } from 'react';
 
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [isOverGallery, setIsOverGallery] = useState(false);
   const [isOverCustom, setIsOverCustom] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // Check if device has touch capability
+    const checkTouchDevice = () => {
+      setIsTouchDevice(
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0
+      );
+    };
+
+    // Check initially
+    checkTouchDevice();
+
+    // Also check on resize in case of device mode changes
+    window.addEventListener('resize', checkTouchDevice);
+
     const updatePosition = (e: MouseEvent) => {
       requestAnimationFrame(() => {
         setPosition({ x: e.clientX, y: e.clientY });
@@ -30,23 +45,29 @@ export default function CustomCursor() {
       setIsOverCustom(customParent !== null);
     };
 
-    window.addEventListener('mousemove', updatePosition, { passive: true });
-    window.addEventListener('mouseover', handleHover, { passive: true });
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
-
-    document.body.style.cursor = 'none';
+    // Only add mouse events if not a touch device
+    if (!isTouchDevice) {
+      window.addEventListener('mousemove', updatePosition, { passive: true });
+      window.addEventListener('mouseover', handleHover, { passive: true });
+      document.addEventListener('mouseenter', handleMouseEnter);
+      document.addEventListener('mouseleave', handleMouseLeave);
+      // Set visible immediately on desktop
+      setIsVisible(true);
+    }
 
     return () => {
-      window.removeEventListener('mousemove', updatePosition);
-      window.removeEventListener('mouseover', handleHover);
-      document.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.body.style.cursor = 'auto';
+      window.removeEventListener('resize', checkTouchDevice);
+      if (!isTouchDevice) {
+        window.removeEventListener('mousemove', updatePosition);
+        window.removeEventListener('mouseover', handleHover);
+        document.removeEventListener('mouseenter', handleMouseEnter);
+        document.removeEventListener('mouseleave', handleMouseLeave);
+      }
     };
-  }, []);
+  }, [isTouchDevice]);
 
-  if (!isVisible) return null;
+  // Don't render anything on touch devices
+  if (isTouchDevice) return null;
 
   return (
     <>
@@ -64,7 +85,7 @@ export default function CustomCursor() {
           zIndex: 9999,
           transform: 'translate(-50%, -50%)',
           willChange: 'transform',
-          opacity: isOverGallery || isOverCustom ? 0 : 1,
+          opacity: (isOverGallery || isOverCustom || !isVisible) ? 0 : 1,
           transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
         }}
       />
@@ -89,7 +110,7 @@ export default function CustomCursor() {
           fontWeight: 500,
           letterSpacing: '0.5px',
           willChange: 'transform',
-          opacity: isOverGallery ? 1 : 0,
+          opacity: isOverGallery && isVisible ? 1 : 0,
           transform: `translate(-50%, -50%) scale(${isOverGallery ? 1 : 0.2})`,
           transformOrigin: '50% 50%',
           transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
@@ -138,7 +159,7 @@ export default function CustomCursor() {
           alignItems: 'center',
           justifyContent: 'center',
           willChange: 'transform',
-          opacity: isOverCustom ? 1 : 0,
+          opacity: isOverCustom && isVisible ? 1 : 0,
           transform: `translate(-50%, -50%) scale(${isOverCustom ? 1 : 0.2})`,
           transformOrigin: '50% 50%',
           transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',

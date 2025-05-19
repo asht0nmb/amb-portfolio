@@ -2,7 +2,7 @@
 
 export default function Hero() {
   return (
-    <section className="relative flex h-[75vh] items-center justify-center px-6 bg-white font-sans">
+    <section className="relative flex h-[60vh] items-center justify-center px-6 bg-white font-sans">
       <div className="inline-flex flex-col md:flex-row items-start md:items-center gap-12">
         <div className="flex flex-col items-start">
         <span className="text-xl text-gray-600 mb-0">

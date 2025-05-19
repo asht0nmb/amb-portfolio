@@ -10,7 +10,10 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    // Set mounted state after hydration
+    requestAnimationFrame(() => {
+      setIsMounted(true);
+    });
   }, []);
 
   return (

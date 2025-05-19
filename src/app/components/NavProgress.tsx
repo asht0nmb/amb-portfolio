@@ -40,27 +40,27 @@ export default function NavProgress({ links }: NavProgressProps) {
 
   const getProgressPath = () => {
     const width = 320;
-    const height = 40;
-    const radius = 20;
+    const height = 48;
+    const radius = 24;
 
     return `
       M ${radius} 0
-      H ${width - radius}
-      C ${width - radius} 0, ${width} 0, ${width} ${radius}
-      V ${height - radius}
-      C ${width} ${height}, ${width - radius} ${height}, ${width - radius} ${height}
-      H ${radius}
-      C ${radius} ${height}, 0 ${height}, 0 ${height - radius}
-      V ${radius}
-      C 0 0, ${radius} 0, ${radius} 0
+      L ${width - radius} 0
+      A ${radius} ${radius} 0 0 1 ${width} ${radius}
+      L ${width} ${height - radius}
+      A ${radius} ${radius} 0 0 1 ${width - radius} ${height}
+      L ${radius} ${height}
+      A ${radius} ${radius} 0 0 1 0 ${height - radius}
+      L 0 ${radius}
+      A ${radius} ${radius} 0 0 1 ${radius} 0
     `;
   };
 
   if (!isMounted) {
     return (
       <div className="fixed left-1/2 top-4 -translate-x-1/2 z-50 hidden md:block">
-        <div className="w-[320px] h-[40px] relative">
-          <div className="absolute inset-0 rounded-[20px] backdrop-blur-sm bg-white/5" />
+        <div className="w-[320px] h-[48px] relative">
+          <div className="absolute inset-0 rounded-[24px] backdrop-blur-sm bg-white/5" />
           <div className="absolute inset-0 flex items-center justify-center gap-12">
             {links.map((link) => (
               <span
@@ -78,13 +78,13 @@ export default function NavProgress({ links }: NavProgressProps) {
 
   return (
     <div className="fixed left-1/2 top-4 -translate-x-1/2 z-50 hidden md:block">
-      <div className="w-[320px] h-[40px] relative">
+      <div className="w-[320px] h-[48px] relative">
         {/* Background with blur */}
-        <div className="absolute inset-0 rounded-[20px] backdrop-blur-sm bg-white/5" />
+        <div className="absolute inset-0 rounded-[24px] backdrop-blur-sm bg-white/5" />
         
         <svg 
           className="w-full h-full relative"
-          viewBox="0 0 320 40"
+          viewBox="0 0 320 48"
           preserveAspectRatio="xMidYMid meet"
         >
           {/* Background track */}
@@ -92,15 +92,18 @@ export default function NavProgress({ links }: NavProgressProps) {
             d={getProgressPath()}
             className="fill-none stroke-black/20"
             strokeWidth={2}
+            strokeLinejoin="round"
+            strokeLinecap="round"
           />
           {/* Progress indicator */}
           <path
             d={getProgressPath()}
             className="fill-none stroke-black/70 transition-all duration-500"
-            strokeWidth={2}
+            strokeWidth={4}
             strokeDasharray={1000}
             strokeDashoffset={1000 - ((scrollProgress / 100) * 1000)}
             strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
 

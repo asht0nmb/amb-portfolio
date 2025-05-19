@@ -23,21 +23,35 @@ export default function GalleryPage() {
       setLoading(true);
       setError(null);
       try {
+        // Check if API key is set
+        const apiKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
+        if (!apiKey) {
+          setError('Unsplash API key is not configured. Please check your environment variables.');
+          console.error('Missing Unsplash API key');
+          return;
+        }
+
         let fetchedPhotos: UnsplashPhoto[] = [];
         
         if (PHOTO_SOURCE === 'username') {
+          console.log('Fetching photos for username:', UNSPLASH_USERNAME);
           fetchedPhotos = await getUserPhotos(UNSPLASH_USERNAME);
         } else if (PHOTO_SOURCE === 'collection' && COLLECTION_ID) {
+          console.log('Fetching photos for collection:', COLLECTION_ID);
           fetchedPhotos = await getCollectionPhotos(COLLECTION_ID);
         }
 
         if (fetchedPhotos.length === 0) {
-          setError('No photos found. Please check your Unsplash username or collection ID.');
+          setError(`No photos found. Please check your Unsplash ${PHOTO_SOURCE === 'username' ? 'username' : 'collection ID'}.`);
+          console.error('No photos returned from Unsplash');
+        } else {
+          console.log('Successfully fetched', fetchedPhotos.length, 'photos');
         }
         
         setPhotos(fetchedPhotos);
       } catch (err) {
-        setError('Error loading photos. Please try again later.');
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+        setError(`Error loading photos: ${errorMessage}`);
         console.error('Error:', err);
       } finally {
         setLoading(false);
@@ -103,9 +117,35 @@ export default function GalleryPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 md:p-8"
             onClick={() => setSelectedPhoto(null)}
           >
+            {/* Close Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedPhoto(null);
+              }}
+              className="fixed top-8 right-8 z-[110] p-3 rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 transition-colors"
+              aria-label="Close photo"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-6 h-6"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}

@@ -98,16 +98,10 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
 
     return (
       <div
+        className="relative w-screen h-[275px] overflow-visible pointer-events-none z-[5]"
         style={{
-          position: 'absolute',
-          top: '520px',
-          left: '50%',
           transform: 'translateX(-50%)',
-          width: '100vw',
-          height: itemHeight,
-          overflow: 'visible',
-          pointerEvents: 'none',
-          zIndex: 5,
+          left: '50%',
         }}
       >
         <div 
