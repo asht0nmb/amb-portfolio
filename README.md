@@ -22,5 +22,6 @@ In Progress:
 ## Notes
 
 - Need to hyperlink unsplash images
-- Iphone hero padding
-- 
+- Mobile hero padding
+- Mobile cursor view
+
