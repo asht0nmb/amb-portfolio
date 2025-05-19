@@ -4,100 +4,40 @@ import { useEffect, useState } from 'react';
 
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const [isOverGallery, setIsOverGallery] = useState(false);
   const [isOverCustom, setIsOverCustom] = useState(false);
-  const [hasPointer, setHasPointer] = useState(false);
 
   useEffect(() => {
-    // Debug logging
-    console.log('CustomCursor mounted');
-    
-    // Check if we have a fine pointer device using pointer media query
-    const mediaQuery = window.matchMedia('(pointer: fine)');
-    const isPointerFine = mediaQuery.matches;
-    console.log('Pointer detection:', { isPointerFine });
-    setHasPointer(isPointerFine);
+    setIsActive(true);
 
-    // Listen for changes in pointer device
-    const handlePointerChange = (e: MediaQueryListEvent) => {
-      console.log('Pointer device changed:', { matches: e.matches });
-      setHasPointer(e.matches);
+    const handleMouseMove = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
     };
-    mediaQuery.addEventListener('change', handlePointerChange);
 
-    const updatePosition = (e: PointerEvent) => {
-      console.log('Pointer event:', { 
-        type: e.pointerType,
-        x: e.clientX,
-        y: e.clientY
-      });
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const galleryParent = target.closest('.diagonal-carousel-container');
+      const customParent = target.closest('.project-card') || target.closest('a.section-title');
       
-      if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
-        requestAnimationFrame(() => {
-          setPosition({ x: e.clientX, y: e.clientY });
-        });
-      }
+      setIsOverGallery(galleryParent !== null);
+      setIsOverCustom(customParent !== null);
     };
 
-    // Debug initial pointer state
-    console.log('Initial pointer state:', {
-      navigator: {
-        maxTouchPoints: navigator.maxTouchPoints,
-        pointerEnabled: 'PointerEvent' in window,
-        touchEnabled: 'ontouchstart' in window
-      }
-    });
-
-    const handlePointerEnter = (e: PointerEvent) => {
-      if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
-        setIsVisible(true);
-      }
-    };
-
-    const handlePointerLeave = (e: PointerEvent) => {
-      if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
-        setIsVisible(false);
-      }
-    };
-
-    // Handle hover states
-    const handleHover = (e: PointerEvent) => {
-      if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
-        const target = e.target as HTMLElement;
-        
-        // Find the closest interactive parent
-        const galleryParent = target.closest('.diagonal-carousel-container');
-        const customParent = target.closest('.project-card') || target.closest('a.section-title');
-        
-        setIsOverGallery(galleryParent !== null);
-        setIsOverCustom(customParent !== null);
-      }
-    };
-
-    window.addEventListener('pointermove', updatePosition, { passive: true });
-    window.addEventListener('pointerover', handleHover, { passive: true });
-    document.addEventListener('pointerenter', handlePointerEnter);
-    document.addEventListener('pointerleave', handlePointerLeave);
-
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseover', handleMouseOver);
+    
     return () => {
-      mediaQuery.removeEventListener('change', handlePointerChange);
-      window.removeEventListener('pointermove', updatePosition);
-      window.removeEventListener('pointerover', handleHover);
-      document.removeEventListener('pointerenter', handlePointerEnter);
-      document.removeEventListener('pointerleave', handlePointerLeave);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
 
-  // Don't render if we don't have a fine pointer device
-  if (!hasPointer) {
-    console.log('Not rendering cursor - no fine pointer detected');
-    return null;
-  }
+  if (!isActive) return null;
 
   return (
     <>
-      {/* Base cursor - always visible */}
+      {/* Base cursor */}
       <div
         style={{
           position: 'fixed',
@@ -105,14 +45,13 @@ export default function CustomCursor() {
           top: position.y,
           width: '8px',
           height: '8px',
-          backgroundColor: 'black',
+          backgroundColor: '#000',
           borderRadius: '50%',
           pointerEvents: 'none',
-          zIndex: 9999,
+          zIndex: 99999,
           transform: 'translate(-50%, -50%)',
-          willChange: 'transform',
-          opacity: (isOverGallery || isOverCustom || !isVisible) ? 0 : 1,
-          transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+          opacity: (isOverGallery || isOverCustom) ? 0 : 0.85,
+          transition: 'opacity 0.3s ease-out',
         }}
       />
       
@@ -124,10 +63,10 @@ export default function CustomCursor() {
           top: position.y,
           width: '97.5px',
           height: '55px',
-          backgroundColor: 'black',
+          backgroundColor: 'rgba(0, 0, 0, 0.85)',
           borderRadius: '30px',
           pointerEvents: 'none',
-          zIndex: 9999,
+          zIndex: 99999,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -135,11 +74,11 @@ export default function CustomCursor() {
           fontSize: '15px',
           fontWeight: 500,
           letterSpacing: '0.5px',
-          willChange: 'transform',
-          opacity: isOverGallery && isVisible ? 1 : 0,
+          opacity: isOverGallery ? 1 : 0,
           transform: `translate(-50%, -50%) scale(${isOverGallery ? 1 : 0.2})`,
           transformOrigin: '50% 50%',
           transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
+          backdropFilter: 'blur(4px)',
         }}
       >
         <div style={{
@@ -177,19 +116,18 @@ export default function CustomCursor() {
           top: position.y,
           width: '73px',
           height: '41px',
-          backgroundColor: 'black',
+          backgroundColor: 'rgba(0, 0, 0, 0.85)',
           borderRadius: '30px',
           pointerEvents: 'none',
-          zIndex: 9999,
+          zIndex: 99999,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          willChange: 'transform',
-          opacity: isOverCustom && isVisible ? 1 : 0,
+          opacity: isOverCustom ? 1 : 0,
           transform: `translate(-50%, -50%) scale(${isOverCustom ? 1 : 0.2})`,
           transformOrigin: '50% 50%',
           transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+          backdropFilter: 'blur(4px)',
         }}
       >
         <svg 
