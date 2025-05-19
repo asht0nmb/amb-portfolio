@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Built With
 
-My personal portfolio [ashtonmb.me](www.ashtonmb.me) that features some of my projects and hobbies.
+My personal portfolio [ashtonmb.me](https://ashtonmb.me) that features some of my projects and hobbies.
 
 This project was built using:
 - React.js
