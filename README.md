@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Built With
 
-My personal portfolio ashtonmb.me, that features some of my projects and hobbies.
+My personal portfolio [ashtonmb.me](www.ashtonmb.me), that features some of my projects and hobbies.
 
 This project was built using:
 - React.js
@@ -12,9 +12,10 @@ This project was built using:
 - Vercel
 
 ## Features
-Photo gallery
 
-I.P.:
+Photo gallery, check out my [unsplash]([url](https://unsplash.com/@ashtonmb))
+
+In Progress:
 - Interactive about page
 - Project highlights
 
