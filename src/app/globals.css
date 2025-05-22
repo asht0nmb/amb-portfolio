@@ -87,3 +87,19 @@ a, button, [role="button"] {
   backface-visibility: hidden;
   transform-style: preserve-3d;
 }
+
+.progress-container {
+  position: fixed;
+  top: 0;
+  z-index: 60;
+  height: 4px;
+  width: 100%;
+  background: transparent;
+}
+
+.progress-bar {
+  height: 4px;
+  background: #000;
+  width: 0%;
+  transition: width 0.1s ease;
+}

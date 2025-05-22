@@ -36,18 +36,18 @@ export default function Footer() {
                 </Link>
               </div>
               <div>
-                <Link href="/about" className={getLinkClasses('/about')}>
-                  {isActive('/about') && '/ '} About
+                <Link href="/about-page" className={getLinkClasses('/about-page')}>
+                  {isActive('/about-page') && '/ '} About
                 </Link>
               </div>
               <div>
-                <Link href="/workspace" className={getLinkClasses('/workspace')}>
-                  {isActive('/workspace') && '/ '} Workspace
+                <Link href="/workspace-page" className={getLinkClasses('/workspace-page')}>
+                  {isActive('/workspace-page') && '/ '} Workspace
                 </Link>
               </div>
               <div>
-                <Link href="/gallery" className={getLinkClasses('/gallery')}>
-                  {isActive('/gallery') && '/ '} Gallery
+                <Link href="/gallery-page" className={getLinkClasses('/gallery-page')}>
+                  {isActive('/gallery-page') && '/ '} Gallery
                 </Link>
               </div>
             </nav>

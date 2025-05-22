@@ -25,8 +25,8 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
       '/photos/peak1.jpg',
     ],
     angle = 7,
-    itemWidth = '350px',
-    itemHeight = '275px',
+    itemWidth = '500px',
+    itemHeight = '425px',
     borderRadius = '12px',
     onClick = () => {},
   }) => {
@@ -102,6 +102,7 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
         style={{
           transform: 'translateX(-50%)',
           left: '50%',
+          marginTop: '-0px'
         }}
       >
         <div 
@@ -109,11 +110,11 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
           className="diagonal-carousel-container"
           style={{
             position: 'absolute',
-            top: 0,
-            left: '-30vw',
+            top: 0, 
+            left: '-30vw', 
             width: '160vw',
             height: itemHeight,
-            transform: `rotate(${rotation}deg)`,
+            transform: `rotateX(30deg) rotateY(35deg) rotateZ(-28deg)`,
             transformOrigin: 'center center',
             overflow: 'visible',
             pointerEvents: 'auto',
@@ -126,7 +127,8 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
           <div 
             className="diagonal-carousel-wrapper"
             style={{
-              perspective: '1000px',
+              perspective: '5000px',
+              perspectiveOrigin: "center center",
               transformStyle: 'preserve-3d',
               overflow: 'visible',
               height: '100%',
@@ -156,7 +158,7 @@ const DiagonalCarousel: React.FC<DiagonalCarouselProps> = ({
                     height: itemHeight,
                     borderRadius,
                     margin: '10px',
-                    transform: `rotateY(${rotation * 0.5}deg)`,
+                    // transform: `rotateY(${rotation * 0.5}deg)`,
                     transformStyle: 'preserve-3d',
                     border: 'none',
                     padding: 0,

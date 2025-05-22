@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import NavProgress from './NavProgress';
-import WeatherWidget from './WeatherWidget';
+import ProgressIndicator from '../ui/ProgressScrollIndicator';
+import NavProgress from '../ui/NavProgress';
+import WeatherWidget from '../ui/WeatherWidget';
 
 const navLinks = [
-  { name: 'About', href: '/about' },
-  { name: 'Workspace', href: '/workspace' },
-  { name: 'Gallery', href: '/gallery' },
+  { name: 'About', href: '/about-page' },
+  { name: 'Workspace', href: '/workspace-page' },
+  { name: 'Gallery', href: '/gallery-page' },
 ];
 
 export default function NavBar() {
@@ -62,6 +63,7 @@ export default function NavBar() {
               width={82}
               height={82}
               className="rounded-lg"
+              style={{ width: 'auto', height: 'auto' }}
             />
           </Link>
         </div>

@@ -1,17 +1,23 @@
-import Hero from './components/Hero';
-import PhotoStrip from './components/PhotoStrip';
-import ProjectCard from './components/ProjectCard';
-import SectionTitle from './components/SectionTitle';
-import NowCard from './components/NowCard';
-import PortfolioCard from './components/PortfolioCard';
+import Hero from './home-page/Hero';
+import PhotoStrip from './home-page/PhotoStrip';
+import ProjectCard from './home-page/DiabetesProjectCard';
+import SectionTitle from './components/features/SectionTitle';
+import NowCard from './home-page/NowCard';
+import PortfolioCard from './home-page/PortfolioCard';
 
 export default function Home() {
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden">
       <div className="flex flex-col">
-        <Hero />
+        <div className='pt-18'>
+          <Hero />
+          <div className='pt-10'>
+          </div>
+        </div>
         <div className="relative">
           <PhotoStrip />
+          <div className='pt-14'>
+          </div>
         </div>
         <div className="w-full max-w-[90vw] xl:max-w-[85vw] mx-auto px-4 sm:px-6 lg:px-8">
           <section className="pt-[200px] sm:pt-[250px] md:pt-[300px] pb-8 relative z-10 pointer-events-none">

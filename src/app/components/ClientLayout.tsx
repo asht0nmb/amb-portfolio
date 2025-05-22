@@ -2,9 +2,9 @@
 
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
-import NavBar from '@/app/components/NavBar';
-import Footer from '@/app/components/Footer';
-import CustomCursor from '@/app/components/CustomCursor';
+import NavBar from '@/app/components/layout/NavBar';
+import Footer from '@/app/components/layout/Footer';
+import CustomCursor from '@/app/components/ui/CustomCursor';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   useEffect(() => {

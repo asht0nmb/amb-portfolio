@@ -22,10 +22,11 @@ export default function NavProgress({ links }: NavProgressProps) {
     if (!isMounted) return;
 
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = totalHeight > 0 
-        ? Math.min((window.scrollY / totalHeight) * 100, 100)
-        : 0;
+      const winScroll = document.documentElement.scrollTop;
+      const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      
+      // Calculate scroll percentage
+      const progress = totalHeight > 0 ? (winScroll / totalHeight) * 100 : 0;
       setScrollProgress(progress);
     };
 
@@ -40,8 +41,8 @@ export default function NavProgress({ links }: NavProgressProps) {
 
   const getProgressPath = () => {
     const width = 320;
-    const height = 48;
-    const radius = 24;
+    const height = 46;
+    const radius = 26;
 
     return `
       M ${radius} 0
@@ -77,14 +78,14 @@ export default function NavProgress({ links }: NavProgressProps) {
   }
 
   return (
-    <div className="fixed left-1/2 top-4 -translate-x-1/2 z-50 hidden md:block">
-      <div className="w-[320px] h-[48px] relative">
+    <div className="fixed left-1/2 top-2 -translate-x-1/2 z-50 hidden md:block overflow-visible">
+      <div className="w-[324px] h-[48px] relative">
         {/* Background with blur */}
         <div className="absolute inset-0 rounded-[24px] backdrop-blur-sm bg-white/5" />
         
         <svg 
-          className="w-full h-full relative"
-          viewBox="0 0 320 48"
+          className="w-full h-full relative overflow visible"
+          viewBox="0 0 324 46"
           preserveAspectRatio="xMidYMid meet"
         >
           {/* Background track */}
@@ -98,8 +99,8 @@ export default function NavProgress({ links }: NavProgressProps) {
           {/* Progress indicator */}
           <path
             d={getProgressPath()}
-            className="fill-none stroke-black/70 transition-all duration-500"
-            strokeWidth={4}
+            className="fill-none stroke-black/70 transition-all duration-500 overflow visible"
+            strokeWidth={2}
             strokeDasharray={1000}
             strokeDashoffset={1000 - ((scrollProgress / 100) * 1000)}
             strokeLinecap="round"

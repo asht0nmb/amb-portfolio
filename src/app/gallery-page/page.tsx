@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getUserPhotos, getCollectionPhotos, UnsplashPhoto } from '@/app/utils/unsplash';
+import { getUserPhotos, getCollectionPhotos, UnsplashPhoto } from '@/utils/unsplash';
 
 // Choose one of these methods:
 const UNSPLASH_USERNAME = 'ashtonmb'; // Your Unsplash username
