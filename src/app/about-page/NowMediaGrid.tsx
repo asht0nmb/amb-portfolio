@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { getTopArtists, getTopTracks } from '../../utils/spotify';
-import StravaStats from '../components/StravaStats';
+import { getTopArtists, getTopTracks } from '../../lib/spotify';
+import StravaStats from '@/components/features/StravaStats';
 
 interface SpotifyArtist {
   id: string;

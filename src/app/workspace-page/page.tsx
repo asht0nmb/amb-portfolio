@@ -1,4 +1,4 @@
-import UnderConstruction from '@/app/components/UnderConstruction';
+import UnderConstruction from '@/components/features/UnderConstruction';
 
 export default function WorkspacePage() {
   return <UnderConstruction />;

@@ -1,9 +1,9 @@
-import Hero from './home-page/Hero';
-import PhotoStrip from './home-page/PhotoStrip';
-import ProjectCard from './home-page/DiabetesProjectCard';
-import SectionTitle from './components/features/SectionTitle';
-import NowCard from './home-page/NowCard';
-import PortfolioCard from './home-page/PortfolioCard';
+import Hero from '@/app/home-page/Hero';
+import PhotoStrip from '@/app/home-page/PhotoStrip';
+import ProjectCard from '@/app/home-page/DiabetesProjectCard';
+import SectionTitle from '@/components/features/SectionTitle';
+import NowCard from '@/app/home-page/NowCard';
+import PortfolioCard from '@/app/home-page/PortfolioCard';
 
 export default function Home() {
   return (

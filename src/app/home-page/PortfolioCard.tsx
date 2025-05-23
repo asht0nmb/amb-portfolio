@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import BrowserMockup from '@/app/components/features/BrowserMockup';
+import BrowserMockup from '@/components/ui/BrowserMockup';
 
 interface PortfolioCardProps {
   title?: string;
