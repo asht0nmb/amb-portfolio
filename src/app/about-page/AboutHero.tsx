@@ -1,5 +1,20 @@
 "use client";
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+// import MapTile from '../components/ui/MapTile';
+// import { MapContainer } from 'react-leaflet';
+
+const MapTile = dynamic(
+  () => import('@/components/features/MapTile'), 
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[300px] bg-gray-100 rounded-3xl flex items-center justify-center">
+        <div className="text-gray-500">Loading map...</div>
+      </div>
+    )
+  }
+);
 
 export default function AboutHero() {
   return (

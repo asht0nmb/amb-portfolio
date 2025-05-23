@@ -1,3 +1,5 @@
+"use client";
+
 import AboutHero from './AboutHero';
 import NowMediaGrid from './NowMediaGrid';
 
