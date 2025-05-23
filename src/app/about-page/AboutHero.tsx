@@ -47,8 +47,12 @@ export default function AboutHero() {
             />
           </div>
           <div className="text-sm text-gray-500 text-center px-2">
-            Summit of Mount Awesome, 2023
+            Mt. Lawrence Grassi | 8,809' | 03/26/25
           </div>
+            <div className="mt-6 w-full">
+              <h2 className="text-xl font-semibold text-gray-500 mb-4 tracking-widest uppercase">/ Location</h2>
+              < MapTile className='rounded-3xl w-full h-64'/>
+            </div>
         </div>
       </div>
     </section>
