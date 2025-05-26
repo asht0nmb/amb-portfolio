@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import ClientLayout from '@/components/layout/ClientLayout';
+import ClientLayout from '@/app/ClientLayout';
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import 'leaflet/dist/leaflet.css';

@@ -43,7 +43,7 @@ export default function Home() {
                 techTags={["Next.js", "TypeScript", "TailwindCSS"]}
                 status="in-progress"
                 collaborators={1}
-                lastUpdated="today"
+                lastUpdated="Today"
                 previewImage="/photos/heroSS.png"
               />
               <NowCard />
