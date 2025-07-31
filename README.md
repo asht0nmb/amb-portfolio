@@ -1,7 +1,7 @@
 
 ## *** IN PROGRESS ***
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This portfolio project is a work-in-progress, and updates come to it when I have free time...
 
 ## Built With
 
