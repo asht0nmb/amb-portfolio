@@ -34,7 +34,8 @@ export default function LoadingSequence({ onComplete }: LoadingSequenceProps) {
         >
           {/* Match the exact structure and positioning of SimpleHero */}
           <div className="relative z-10 px-6 max-w-lg mx-auto">
-            <div className="text-5xl md:text-6xl font-semibold text-gray-900 leading-tight">
+            {/* Match the h1 with mb-6 to account for spacing */}
+            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6 leading-tight">
               {/* "Hi, I'm" fades out after loading phase */}
               <motion.span
                 initial={{ opacity: 0 }}
@@ -48,7 +49,7 @@ export default function LoadingSequence({ onComplete }: LoadingSequenceProps) {
                 Hi, I&apos;m
               </motion.span>
 
-              {/* "Ashton" stays in place throughout */}
+              {/* "Ashton" stays in place throughout - positioned exactly where hero's Ashton will be */}
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -57,7 +58,7 @@ export default function LoadingSequence({ onComplete }: LoadingSequenceProps) {
               >
                 Ashton
               </motion.span>
-            </div>
+            </h1>
           </div>
         </motion.div>
       )}
