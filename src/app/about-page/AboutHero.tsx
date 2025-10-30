@@ -31,8 +31,8 @@ export default function AboutHero() {
             <div className="space-y-4">
               <h2 className="text-h4 text-gray-900 font-semibold uppercase tracking-wide">Background</h2>
               <p className="text-body text-gray-700 leading-relaxed">
-                I grew up in Port Townsend, WA and didn't know what UI meant until 2024. 
-                I've learned a lot since then, and intend to continue. My favorite ways to 
+                I grew up in Port Townsend, WA and didn&apos;t know what UI meant until 2024. 
+                I&apos;ve learned a lot since then, and intend to continue. My favorite ways to 
                 learn are traveling, reading, and trying.
               </p>
             </div>
@@ -42,7 +42,7 @@ export default function AboutHero() {
             <div className="space-y-4">
               <h2 className="text-h4 text-gray-900 font-semibold uppercase tracking-wide">Now</h2>
               <p className="text-body text-gray-700 leading-relaxed">
-                Currently, I'm focused on learning as much as possible, particularly from my 
+                Currently, I&apos;m focused on learning as much as possible, particularly from my 
                 mentors @ JulyAI, and a long list of book recommendations. My aim is to collect 
                 experiences in the pursuit of making my next product or project better than the last.
               </p>
@@ -62,7 +62,7 @@ export default function AboutHero() {
             />
           </div>
           <div className="text-body-small text-gray-500 text-center px-2 mb-6">
-            Mt. Lawrence Grassi | 8,809' | 03/26/25
+            Mt. Lawrence Grassi | 8,809&apos; | 03/26/25
           </div>
 
           <GlassSurface variant="subtle" className="w-full card-padding">

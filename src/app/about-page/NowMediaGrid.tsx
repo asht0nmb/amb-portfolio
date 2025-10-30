@@ -98,8 +98,8 @@ export default function NowMediaGrid() {
         <div className="bg-gray-100 rounded-xl p-6 min-h-[120px]">
           <h4 className="font-semibold mb-2">Reading</h4>
           <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
-            <li>"Designing Data-Intensive Applications" by Martin Kleppmann</li>
-            <li>"The Pragmatic Programmer" by Andrew Hunt and David Thomas</li>
+            <li>&quot;Designing Data-Intensive Applications&quot; by Martin Kleppmann</li>
+            <li>&quot;The Pragmatic Programmer&quot; by Andrew Hunt and David Thomas</li>
           </ul>
         </div>
       </div>

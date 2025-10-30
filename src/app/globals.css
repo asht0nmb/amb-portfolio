@@ -104,14 +104,28 @@
   --glass-blur-mobile: 8px;
   --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
 
-  /* Fluid Animation Properties */
+  /* Fluid Animation Properties - Water-inspired cubic-bezier curves */
   --ripple-duration: 2s;
   --ripple-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  --liquid-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --water-flow: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Water-inspired easing curves */
+  --water-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);      /* Gentle water flow */
+  --water-splash: cubic-bezier(0.68, -0.55, 0.265, 1.55);    /* Water splash effect */
+  --water-ripple: cubic-bezier(0.34, 1.56, 0.64, 1);         /* Ripple expansion */
+  --water-settle: cubic-bezier(0.23, 1, 0.32, 1);            /* Water settling */
+  --water-surface: cubic-bezier(0.165, 0.84, 0.44, 1);       /* Surface tension */
+  --water-drop: cubic-bezier(0.76, 0, 0.24, 1);              /* Water drop fall */
+  
+  /* Legacy aliases for backward compatibility */
+  --liquid-spring: var(--water-ripple);
+  --water-flow: var(--water-gentle);
+  
+  /* Timing variables */
   --interaction-duration: 200ms;
   --transition-duration: 300ms;
   --ambient-duration: 2000ms;
+  --hover-duration: 400ms;
+  --focus-duration: 150ms;
 
   /* Fluid Colors */
   --water-blue: rgba(59, 130, 246, 0.3);
@@ -458,17 +472,46 @@
   }
 }
 
-/* Fluid Animation Utility Classes */
+/* Fluid Animation Utility Classes with Water-inspired Easing */
 .fluid-transition {
-  transition: all var(--transition-duration) var(--ripple-easing);
+  transition: all var(--transition-duration) var(--water-gentle);
 }
 
 .fluid-hover {
-  transition: transform var(--interaction-duration) var(--water-flow);
+  transition: 
+    transform var(--hover-duration) var(--water-surface),
+    box-shadow var(--hover-duration) var(--water-settle),
+    backdrop-filter var(--hover-duration) var(--water-gentle);
 }
 
 .fluid-hover:hover {
   transform: translateY(-2px) scale(1.02);
+}
+
+/* Specific water-inspired animation classes */
+.water-gentle-transition {
+  transition: all var(--transition-duration) var(--water-gentle);
+}
+
+.water-splash-hover:hover {
+  transition: transform var(--interaction-duration) var(--water-splash);
+  transform: translateY(-4px) scale(1.05);
+}
+
+.water-ripple-expand {
+  transition: transform var(--ambient-duration) var(--water-ripple);
+}
+
+.water-settle-animation {
+  transition: all var(--hover-duration) var(--water-settle);
+}
+
+.water-surface-tension {
+  transition: all var(--transition-duration) var(--water-surface);
+}
+
+.water-drop-fall {
+  transition: transform var(--interaction-duration) var(--water-drop);
 }
 
 /* Focus States for Accessibility */
@@ -511,6 +554,124 @@
 
 .water-glow {
   filter: url(#water-glow);
+}
+
+/* Performance-Optimized CSS Custom Properties */
+:root {
+  /* Transform performance optimization */
+  --transform-gpu: translateZ(0); /* Force GPU acceleration */
+  --will-change-transform: transform;
+  --will-change-auto: auto;
+  
+  /* Optimized magnetic transforms */
+  --magnetic-x: 0px;
+  --magnetic-y: 0px;
+  --magnetic-scale: 1;
+  --magnetic-rotate: 0deg;
+  
+  /* Glass effect performance variables */
+  --glass-opacity-current: var(--glass-standard);
+  --glass-blur-current: var(--glass-blur);
+  --glass-scale: 1;
+  
+  /* Hover state performance variables */
+  --hover-translate-y: 0px;
+  --hover-scale: 1;
+  --hover-opacity: 1;
+  --hover-blur: 0px;
+}
+
+/* Performance-Optimized Transform Classes */
+.gpu-accelerated {
+  transform: var(--transform-gpu);
+  will-change: var(--will-change-transform);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.optimized-magnetic {
+  transform: 
+    translate3d(var(--magnetic-x), var(--magnetic-y), 0)
+    scale(var(--magnetic-scale))
+    rotate(var(--magnetic-rotate));
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.optimized-glass-hover {
+  transform: 
+    translate3d(0, var(--hover-translate-y), 0)
+    scale(var(--hover-scale));
+  opacity: var(--hover-opacity);
+  backdrop-filter: blur(calc(var(--glass-blur-current) + var(--hover-blur)));
+  will-change: transform, opacity, backdrop-filter;
+  contain: layout style;
+}
+
+/* Optimized hover states using custom properties */
+.optimized-glass-hover:hover {
+  --hover-translate-y: -2px;
+  --hover-scale: 1.02;
+  --hover-blur: 2px;
+}
+
+.optimized-glass-hover:active {
+  --hover-translate-y: -1px;
+  --hover-scale: 1.01;
+}
+
+/* Performance-optimized animations using transform3d */
+@keyframes optimized-water-ripple {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale3d(0, 0, 1);
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale3d(4, 4, 1);
+    opacity: 0;
+  }
+}
+
+@keyframes optimized-magnetic-attraction {
+  0% {
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  }
+  100% {
+    transform: translate3d(var(--magnetic-x), var(--magnetic-y), 0) scale3d(var(--magnetic-scale), var(--magnetic-scale), 1);
+  }
+}
+
+/* Containment for performance */
+.performance-container {
+  contain: layout style paint;
+  will-change: auto;
+}
+
+.performance-container:hover {
+  will-change: transform, opacity;
+}
+
+.performance-container:not(:hover) {
+  will-change: auto;
+}
+
+/* Optimized glass surface with containment */
+.optimized-glass-surface {
+  contain: layout style paint;
+  background: var(--glass-opacity-current);
+  backdrop-filter: blur(var(--glass-blur-current));
+  transform: translate3d(0, 0, 0) scale(var(--glass-scale));
+  will-change: var(--will-change-auto);
+}
+
+.optimized-glass-surface:hover {
+  --glass-opacity-current: var(--glass-prominent);
+  --glass-blur-current: calc(var(--glass-blur) + 2px);
+  --glass-scale: 1.02;
+  will-change: transform, backdrop-filter;
 }
 
 /* Gradient utilities for water effects */
@@ -665,28 +826,37 @@
   }
 }
 
-/* Reduced Motion Support */
+/* Enhanced Accessibility: Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
-
+  /* Disable all transform-based hover effects */
   .glass-hover:hover,
-  .fluid-hover:hover {
-    transform: none;
+  .fluid-hover:hover,
+  .water-splash-hover:hover {
+    transform: none !important;
   }
 
+  /* Disable all fluid transitions */
   .fluid-transition,
-  .fluid-hover {
-    transition: none;
+  .fluid-hover,
+  .water-gentle-transition,
+  .water-settle-animation,
+  .water-surface-tension,
+  .water-drop-fall {
+    transition: none !important;
   }
 
   /* Disable water animations for reduced motion */
   .water-surface {
-    animation: none;
-    background: rgba(59, 130, 246, 0.05);
+    animation: none !important;
+    background: rgba(59, 130, 246, 0.05) !important;
   }
 
+  /* Disable all water-related animations */
   [class*="water-wave"],
-  [class*="water-disturbance"] {
+  [class*="water-disturbance"],
+  .water-ripple-expand {
     animation: none !important;
+    transition: none !important;
   }
 
   /* Disable scroll animations for reduced motion */
@@ -700,12 +870,126 @@
   }
 
   .wave-section::before {
-    display: none;
+    display: none !important;
   }
 
   /* Disable canvas animations */
   canvas {
     display: none !important;
+  }
+
+  /* Disable cursor animations */
+  .animate-ping,
+  .animate-pulse {
+    animation: none !important;
+  }
+
+  /* Provide alternative focus indicators for reduced motion */
+  .glass-focus:focus,
+  .glass-focus:focus-visible {
+    outline: 3px solid var(--color-blue-500) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2) !important;
+  }
+}
+
+/* Enhanced Focus States for Better Accessibility */
+.glass-focus {
+  position: relative;
+}
+
+.glass-focus:focus {
+  outline: 2px solid var(--color-blue-500);
+  outline-offset: 2px;
+  transition: outline-color var(--focus-duration) var(--water-gentle);
+}
+
+.glass-focus:focus-visible {
+  outline: 2px solid var(--color-blue-500);
+  outline-offset: 2px;
+  box-shadow: 
+    0 0 0 4px rgba(59, 130, 246, 0.2),
+    0 0 0 8px rgba(59, 130, 246, 0.1);
+  transition: 
+    outline-color var(--focus-duration) var(--water-gentle),
+    box-shadow var(--focus-duration) var(--water-settle);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-focus:focus,
+  .glass-focus:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+    box-shadow: none;
+  }
+  
+  /* Ensure glass elements have sufficient contrast */
+  .glass-subtle,
+  .glass-standard,
+  .glass-prominent {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid currentColor;
+  }
+}
+
+/* Keyboard navigation enhancements */
+.glass-interactive {
+  position: relative;
+}
+
+.glass-interactive:focus-within {
+  outline: 2px solid var(--color-blue-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-lg);
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-blue-600);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top var(--focus-duration) var(--water-gentle);
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus trap for modal dialogs */
+.focus-trap {
+  position: relative;
+}
+
+.focus-trap:focus-within {
+  outline: none;
+}
+
+/* Ensure interactive elements have minimum touch target size */
+@media (pointer: coarse) {
+  .glass-interactive,
+  .fluid-hover {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 
@@ -772,4 +1056,96 @@ body {
   background: #000;
   width: 0%;
   transition: width 0.1s ease;
+}
+
+/* Performance Monitoring and Optimization */
+.performance-debug {
+  position: relative;
+}
+
+.performance-debug::after {
+  content: attr(data-performance-cost);
+  position: absolute;
+  top: -20px;
+  right: 0;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 2px 6px;
+  font-size: 10px;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.performance-debug:hover::after {
+  opacity: 1;
+}
+
+/* Battery-optimized animations */
+@media (prefers-reduced-motion: no-preference) {
+  .battery-optimized {
+    animation-duration: 0.5s;
+    transition-duration: 0.2s;
+  }
+  
+  .battery-optimized:hover {
+    animation-duration: 0.3s;
+    transition-duration: 0.15s;
+  }
+}
+
+/* High refresh rate optimizations */
+@media (min-resolution: 120dpi) {
+  .high-refresh-optimized {
+    animation-duration: 0.1s;
+    transition-duration: 0.05s;
+  }
+}
+
+/* Cursor Enhancement Utilities */
+.cursor-glass-aware {
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  contain: layout style paint;
+  will-change: transform, opacity;
+}
+
+.cursor-interactive-glow {
+  box-shadow: 
+    0 0 10px rgba(59, 130, 246, 0.4),
+    0 0 20px rgba(59, 130, 246, 0.2);
+  contain: layout style paint;
+}
+
+/* Memory-efficient glass effects */
+.memory-efficient-glass {
+  background: var(--glass-standard);
+  backdrop-filter: blur(var(--glass-blur-mobile));
+  border: 1px solid var(--glass-border);
+  contain: strict;
+  content-visibility: auto;
+}
+
+@media (min-width: 768px) {
+  .memory-efficient-glass {
+    backdrop-filter: blur(var(--glass-blur));
+  }
+}
+
+/* Intersection observer optimizations */
+.lazy-glass-effect {
+  background: transparent;
+  transition: background 0.3s var(--water-gentle);
+}
+
+.lazy-glass-effect.in-viewport {
+  background: var(--glass-standard);
+  backdrop-filter: blur(var(--glass-blur-mobile));
+}
+
+@media (min-width: 768px) {
+  .lazy-glass-effect.in-viewport {
+    backdrop-filter: blur(var(--glass-blur));
+  }
 }

@@ -31,7 +31,7 @@ export default function AboutInfo() {
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0"></div>
                 <p className="text-body text-gray-700">
-                  <span className="font-medium">Curiosity:</span> Always asking "what if" and "why not"
+                  <span className="font-medium">Curiosity:</span> Always asking &quot;what if&quot; and &quot;why not&quot;
                 </p>
               </div>
               <div className="flex items-start gap-3">
