@@ -1,4 +1,4 @@
-interface StravaActivity {
+export interface StravaActivity {
   id: number;
   name: string;
   distance: number; // in meters

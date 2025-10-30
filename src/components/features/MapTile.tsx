@@ -3,7 +3,7 @@
 import 'leaflet/dist/leaflet.css'
 import { Map as MapLeaflet, type ZoomPanOptions } from 'leaflet'
 import { useEffect, useRef, useState } from 'react'
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
 
 import { Minus } from '@/components/icons/Minus'
 import { Plus } from '@/components/icons/Plus'

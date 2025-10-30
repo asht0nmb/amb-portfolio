@@ -1,17 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  WiDaySunny, WiNightClear,
-  WiDayCloudy, WiNightAltCloudy,
-  WiCloudy,
-  WiDayFog, WiNightFog,
-  WiDayRain, WiNightRain,
-  WiDaySnow, WiNightSnow,
-  WiDayThunderstorm, WiNightThunderstorm,
-  WiDayShowers, WiNightShowers,
-  WiDaySleet, WiNightSleet,
-} from 'react-icons/wi';
 
 interface WeatherData {
   weatherCode: number;
@@ -118,30 +107,30 @@ export default function WeatherWidget() {
   const getWeatherIcon = (code: number, isDay: boolean) => {
     // WMO Weather interpretation codes (https://open-meteo.com/en/docs)
     if (code === 0) { // Clear sky
-      return isDay ? <WiDaySunny className="w-5 h-5" /> : <WiNightClear className="w-5 h-5" />;
+      return <span className="text-lg">{isDay ? '☀️' : '🌙'}</span>;
     } else if (code <= 2) { // Partly cloudy
-      return isDay ? <WiDayCloudy className="w-5 h-5" /> : <WiNightAltCloudy className="w-5 h-5" />;
+      return <span className="text-lg">{isDay ? '⛅' : '☁️'}</span>;
     } else if (code <= 49) { // Cloudy, foggy
       if (code >= 45) { // Foggy (45-48)
-        return isDay ? <WiDayFog className="w-5 h-5" /> : <WiNightFog className="w-5 h-5" />;
+        return <span className="text-lg">🌫️</span>;
       }
-      return <WiCloudy className="w-5 h-5" />; // Cloudy is the same for day/night
+      return <span className="text-lg">☁️</span>; // Cloudy
     } else if (code <= 69) { // Drizzle (50-59) and Rain (60-69)
       if (code <= 59) { // Drizzle
-        return isDay ? <WiDayShowers className="w-5 h-5" /> : <WiNightShowers className="w-5 h-5" />;
+        return <span className="text-lg">🌦️</span>;
       }
-      return isDay ? <WiDayRain className="w-5 h-5" /> : <WiNightRain className="w-5 h-5" />;
+      return <span className="text-lg">🌧️</span>;
     } else if (code <= 79) { // Snow (70-79)
-      return isDay ? <WiDaySnow className="w-5 h-5" /> : <WiNightSnow className="w-5 h-5" />;
+      return <span className="text-lg">❄️</span>;
     } else if (code <= 84) { // Rain showers
-      return isDay ? <WiDayShowers className="w-5 h-5" /> : <WiNightShowers className="w-5 h-5" />;
+      return <span className="text-lg">🌦️</span>;
     } else if (code <= 94) { // Snow/rain showers (85-94)
       if (code <= 89) { // Snow showers
-        return isDay ? <WiDaySnow className="w-5 h-5" /> : <WiNightSnow className="w-5 h-5" />;
+        return <span className="text-lg">🌨️</span>;
       }
-      return isDay ? <WiDaySleet className="w-5 h-5" /> : <WiNightSleet className="w-5 h-5" />; // Mixed precipitation
+      return <span className="text-lg">🌨️</span>; // Mixed precipitation
     } else { // Thunderstorm (95-99)
-      return isDay ? <WiDayThunderstorm className="w-5 h-5" /> : <WiNightThunderstorm className="w-5 h-5" />;
+      return <span className="text-lg">⛈️</span>;
     }
   };
 

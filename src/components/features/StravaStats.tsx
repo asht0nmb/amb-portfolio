@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { getAthleteStats, getRecentActivities, formatDistance, formatDuration } from '@/lib/strava';
-import { FaRunning, FaBiking } from 'react-icons/fa';
+import { getAthleteStats, getRecentActivities, formatDistance, formatDuration, type StravaActivity } from '@/lib/strava';
+// Using simple text icons instead of react-icons for now
 
 interface ActivityStats {
   distance: number;
@@ -17,7 +17,7 @@ export default function StravaStats() {
     ytdRuns: ActivityStats;
     ytdRides: ActivityStats;
   } | null>(null);
-  const [recentActivities, setRecentActivities] = useState<any[]>([]);
+  const [recentActivities, setRecentActivities] = useState<StravaActivity[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -97,7 +97,7 @@ export default function StravaStats() {
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <FaRunning className="text-gray-700" />
+            <span className="text-gray-700">🏃</span>
             <span className="text-sm text-gray-700">Running</span>
           </div>
           <div className="text-xs text-gray-500">
@@ -107,7 +107,7 @@ export default function StravaStats() {
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <FaBiking className="text-gray-700" />
+            <span className="text-gray-700">🚴</span>
             <span className="text-sm text-gray-700">Cycling</span>
           </div>
           <div className="text-xs text-gray-500">

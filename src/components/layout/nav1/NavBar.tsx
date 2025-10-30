@@ -76,7 +76,7 @@ export default function NavBar() {
             onClick={toggleMenu}
             className="w-8 h-8 flex flex-col items-center justify-center gap-1.5 z-50"
             aria-label={isOpen ? "Close menu" : "Open menu"}
-            style={{ cursor: 'none' }}
+
           >
             <span 
               className={`w-5 h-[1px] bg-current opacity-80 transition-all duration-300 ${
@@ -119,7 +119,7 @@ export default function NavBar() {
               key={link.name}
               href={link.href}
               onClick={closeMenu}
-              className="text-3xl text-neutral-600 hover:text-neutral-900 transition-all duration-300 ease-out cursor-none"
+              className="text-3xl text-neutral-600 hover:text-neutral-900 transition-all duration-300 ease-out"
             >
               {link.name}
             </Link>

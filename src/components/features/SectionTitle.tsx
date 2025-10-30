@@ -12,7 +12,6 @@ export default function SectionTitle({ title }: SectionTitleProps) {
       <Link 
         href="/workspace" 
         className="section-title inline-flex items-center gap-3"
-        style={{ cursor: 'none' }}
       >
         <h2 className="text-sm uppercase tracking-widest text-gray-400/80">
           {title}

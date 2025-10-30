@@ -66,7 +66,7 @@ export default function NavProgress({ links }: NavProgressProps) {
             {links.map((link) => (
               <span
                 key={link.name}
-                className="text-neutral-800 cursor-none"
+                className="text-neutral-800"
               >
                 {link.name}
               </span>
@@ -114,7 +114,7 @@ export default function NavProgress({ links }: NavProgressProps) {
             <Link
               key={link.name}
               href={link.href}
-              className={`text-neutral-800 hover:text-black transition-all duration-500 ease-in-out cursor-none transform hover:-translate-y-1 relative z-10 ${
+              className={`text-neutral-800 hover:text-black transition-all duration-500 ease-in-out transform hover:-translate-y-1 relative z-10 ${
                 isActive(link.href) ? 'font-medium' : ''
               }`}
             >

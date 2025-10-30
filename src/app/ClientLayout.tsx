@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
-import NavBar from '@/components/layout/nav1/NavBar';
+import GlassNavBar from '@/components/layout/GlassNavBar';
 import Footer from '@/components/layout/Footer';
 import CustomCursor from '@/components/features/cursor/CustomCursor';
 
@@ -20,7 +20,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <CustomCursor />
-      <NavBar />
+      <GlassNavBar />
       <main className="flex-1">
         {children}
       </main>

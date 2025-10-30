@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getUserPhotos, getCollectionPhotos, UnsplashPhoto } from '@/lib/unsplash';
+import GlassSurface from '@/components/ui/GlassSurface';
 
 // Choose one of these methods:
 const UNSPLASH_USERNAME = 'ashtonmb'; // Your Unsplash username
@@ -101,108 +102,181 @@ export default function GalleryPage() {
                   src={photo.urls.regular}
                   alt={photo.description || ''}
                   fill
-                  className="object-cover rounded-xl transition-all duration-300 group-hover:opacity-95"
+                  className="object-cover rounded-xl transition-all duration-300"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+                
+                {/* Glass Metadata Overlay - appears on hover */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileHover={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="absolute inset-x-0 bottom-0 p-4 pointer-events-none"
+                >
+                  <GlassSurface 
+                    variant="standard" 
+                    hover={false}
+                    className="p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="text-white text-sm">
+                      {photo.exif && (photo.exif.make || photo.exif.model) && (
+                        <p className="font-medium mb-1">
+                          {photo.exif.make} {photo.exif.model}
+                        </p>
+                      )}
+                      {photo.exif && (
+                        <div className="flex gap-2 text-xs opacity-90">
+                          {photo.exif.focal_length && (
+                            <span>{photo.exif.focal_length}mm</span>
+                          )}
+                          {photo.exif.aperture && (
+                            <span>ƒ/{photo.exif.aperture}</span>
+                          )}
+                          {photo.exif.exposure_time && (
+                            <span>{photo.exif.exposure_time}s</span>
+                          )}
+                          {photo.exif.iso && (
+                            <span>ISO {photo.exif.iso}</span>
+                          )}
+                        </div>
+                      )}
+                      {!photo.exif && photo.description && (
+                        <p className="text-xs opacity-90 line-clamp-2">
+                          {photo.description}
+                        </p>
+                      )}
+                    </div>
+                  </GlassSurface>
+                </motion.div>
               </div>
             ))}
           </div>
         )}
 
-        {/* Expanded Photo View */}
+        {/* Expanded Photo View with Glass Frame */}
         <AnimatePresence>
           {selectedPhoto && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 md:p-8"
               onClick={() => setSelectedPhoto(null)}
             >
-              {/* Close Button */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedPhoto(null);
-                }}
-                className="fixed top-8 right-8 z-[110] p-3 rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 transition-colors"
-                aria-label="Close photo"
+              {/* Close Button with Glass Surface */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="fixed top-8 right-8 z-[110]"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
+                <GlassSurface variant="standard" className="p-3">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPhoto(null);
+                    }}
+                    className="text-white hover:text-gray-300 transition-colors"
+                    aria-label="Close photo"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-6 h-6"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </GlassSurface>
+              </motion.div>
 
+              {/* Glass Frame Container */}
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="relative w-full max-w-4xl aspect-auto"
-                style={{ height: 'calc(85vh)' }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+                className="relative w-full max-w-5xl"
                 onClick={(e) => e.stopPropagation()}
               >
-                <Image
-                  src={selectedPhoto.urls.regular}
-                  alt={selectedPhoto.description || ''}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 1024px) 100vw, 1024px"
-                  priority
-                />
-                
-                {/* Photo Info Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="flex justify-end items-end max-w-7xl mx-auto">
-                    <div className="bg-black/50 backdrop-blur-sm text-white p-3 rounded-lg">
-                      {selectedPhoto.exif && Object.keys(selectedPhoto.exif).length > 0 && (
-                        <>
-                          {selectedPhoto.exif.make && selectedPhoto.exif.model && (
-                            <p className="text-sm opacity-90 mb-1">{selectedPhoto.exif.make} {selectedPhoto.exif.model}</p>
-                          )}
-                          <div className="flex gap-3 text-sm opacity-80">
-                            {selectedPhoto.exif.focal_length && (
-                              <span>{selectedPhoto.exif.focal_length}mm</span>
+                <GlassSurface 
+                  variant="subtle" 
+                  hover={false}
+                  className="p-6 md:p-8"
+                >
+                  {/* Photo Container - clean without glass effects */}
+                  <div 
+                    className="relative w-full bg-black rounded-lg overflow-hidden"
+                    style={{ height: 'calc(80vh - 8rem)' }}
+                  >
+                    <Image
+                      src={selectedPhoto.urls.regular}
+                      alt={selectedPhoto.description || ''}
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 1024px) 100vw, 1024px"
+                      priority
+                    />
+                  </div>
+                  
+                  {/* Glass Info Panel at Bottom */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                    className="mt-4 flex justify-between items-end"
+                  >
+                    {/* Description */}
+                    {selectedPhoto.description && (
+                      <div className="flex-1 mr-4">
+                        <GlassSurface variant="standard" hover={false} className="p-3">
+                          <p className="text-white text-sm">
+                            {selectedPhoto.description}
+                          </p>
+                        </GlassSurface>
+                      </div>
+                    )}
+                    
+                    {/* EXIF Data */}
+                    {selectedPhoto.exif && Object.keys(selectedPhoto.exif).length > 0 && (
+                      <div className="flex-shrink-0">
+                        <GlassSurface variant="standard" hover={false} className="p-3">
+                          <div className="text-white text-right">
+                            {selectedPhoto.exif.make && selectedPhoto.exif.model && (
+                              <p className="text-sm font-medium mb-1">
+                                {selectedPhoto.exif.make} {selectedPhoto.exif.model}
+                              </p>
                             )}
-                            {selectedPhoto.exif.aperture && (
-                              <span>ƒ/{selectedPhoto.exif.aperture}</span>
-                            )}
-                            {selectedPhoto.exif.exposure_time && (
-                              <span>{selectedPhoto.exif.exposure_time}s</span>
-                            )}
-                            {selectedPhoto.exif.iso && (
-                              <span>ISO {selectedPhoto.exif.iso}</span>
-                            )}
+                            <div className="flex gap-3 text-xs opacity-90">
+                              {selectedPhoto.exif.focal_length && (
+                                <span>{selectedPhoto.exif.focal_length}mm</span>
+                              )}
+                              {selectedPhoto.exif.aperture && (
+                                <span>ƒ/{selectedPhoto.exif.aperture}</span>
+                              )}
+                              {selectedPhoto.exif.exposure_time && (
+                                <span>{selectedPhoto.exif.exposure_time}s</span>
+                              )}
+                              {selectedPhoto.exif.iso && (
+                                <span>ISO {selectedPhoto.exif.iso}</span>
+                              )}
+                            </div>
                           </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Description Overlay (if exists) */}
-                {selectedPhoto.description && (
-                  <div className="absolute top-0 left-0 right-0 p-4">
-                    <div className="max-w-7xl mx-auto">
-                      <p className="bg-black/50 backdrop-blur-sm text-white p-3 rounded-lg text-sm">
-                        {selectedPhoto.description}
-                      </p>
-                    </div>
-                  </div>
-                )}
+                        </GlassSurface>
+                      </div>
+                    )}
+                  </motion.div>
+                </GlassSurface>
               </motion.div>
             </motion.div>
           )}
