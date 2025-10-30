@@ -28,37 +28,39 @@ export default function LoadingSequence({ onComplete }: LoadingSequenceProps) {
     <AnimatePresence>
       {phase !== 'complete' && (
         <motion.div
-          className="fixed inset-0 bg-white z-50 flex items-center justify-center"
+          className="fixed inset-0 bg-white z-50"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          {/* Match the exact structure and positioning of SimpleHero */}
-          <div className="relative z-10 px-6 max-w-lg mx-auto">
-            {/* Match the h1 with mb-6 to account for spacing */}
-            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6 leading-tight">
-              {/* "Hi, I'm" fades out after loading phase */}
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: phase === 'loading' ? 1 : 0 }}
-                transition={{
-                  duration: phase === 'loading' ? 0.6 : 0.3,
-                  ease: "easeOut"
-                }}
-                className="inline-block mr-3"
-              >
-                Hi, I&apos;m
-              </motion.span>
+          {/* Create the exact same layout structure as SimpleHero to match positioning */}
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="relative z-10 px-6 max-w-lg mx-auto">
+              {/* Container with 20px downward offset to match hero's initial animation position */}
+              <div className="mb-6" style={{ transform: 'translateY(20px)' }}>
+                {/* "Hi, I'm" - positioned before "Ashton" in the flow */}
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: phase === 'loading' ? 1 : 0 }}
+                  transition={{
+                    duration: phase === 'loading' ? 0.6 : 0.3,
+                    ease: "easeOut"
+                  }}
+                  className="text-5xl md:text-6xl font-semibold text-gray-900 leading-tight inline-block mr-3"
+                >
+                  Hi, I&apos;m
+                </motion.span>
 
-              {/* "Ashton" stays in place throughout - positioned exactly where hero's Ashton will be */}
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-                className="inline-block"
-              >
-                Ashton
-              </motion.span>
-            </h1>
+                {/* "Ashton" - positioned 20px down to match hero's y:20 initial state */}
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                  className="text-5xl md:text-6xl font-semibold text-gray-900 leading-tight inline-block"
+                >
+                  Ashton
+                </motion.span>
+              </div>
+            </div>
           </div>
         </motion.div>
       )}

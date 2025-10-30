@@ -80,19 +80,17 @@ export default function GalleryPage() {
               <p className="text-base text-neutral-600 font-light">
                 I love taking pictures
               </p>
-              {stats?.views.total && (
-                <>
-                  <span className="text-neutral-300">|</span>
-                  <a
-                    href={`https://unsplash.com/@${UNSPLASH_USERNAME}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-neutral-500 hover:text-neutral-700 transition-colors"
-                  >
-                    {stats.views.total.toLocaleString()} views
-                  </a>
-                </>
-              )}
+              <span className="text-neutral-300">|</span>
+              <a
+                href={`https://unsplash.com/@${UNSPLASH_USERNAME}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-neutral-500 hover:text-neutral-700 transition-colors"
+              >
+                {stats?.views.total !== undefined
+                  ? `${stats.views.total.toLocaleString()} views`
+                  : '— views'}
+              </a>
             </div>
           </div>
           <div className="lg:col-start-3 text-sm text-neutral-500">
