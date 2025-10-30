@@ -75,7 +75,7 @@ export default function GlassNavBar() {
         >
           <div className="flex items-center justify-between w-full gap-8">
             {/* Left: Logo */}
-            <Link href="/" className="flex items-center" onClick={closeMenu}>
+            <Link href="/" className="flex items-center" onClick={closeMenu} scroll={false}>
               <Image
                 src="/photos/logos/amb1.png"
                 alt="AMB Logo"
@@ -92,11 +92,12 @@ export default function GlassNavBar() {
                 <Link
                   key={link.name}
                   href={link.href}
+                  scroll={false}
                   className={`
                     text-sm font-medium transition-all duration-200 relative
                     glass-focus fluid-transition
-                    ${isActiveLink(link.href) 
-                      ? 'text-blue-600 font-semibold' 
+                    ${isActiveLink(link.href)
+                      ? 'text-blue-600 font-semibold'
                       : 'text-neutral-700 hover:text-neutral-900'
                     }
                   `}
@@ -106,7 +107,7 @@ export default function GlassNavBar() {
                   {link.name}
                   {/* Active indicator */}
                   {isActiveLink(link.href) && (
-                    <span 
+                    <span
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-500 rounded-full"
                       aria-hidden="true"
                     />
@@ -163,11 +164,12 @@ export default function GlassNavBar() {
             <Link
               key={link.name}
               href={link.href}
+              scroll={false}
               onClick={closeMenu}
               className={`
                 text-2xl font-medium transition-all duration-200 glass-focus
-                ${isActiveLink(link.href) 
-                  ? 'text-blue-600 font-semibold' 
+                ${isActiveLink(link.href)
+                  ? 'text-blue-600 font-semibold'
                   : 'text-neutral-700 hover:text-neutral-900'
                 }
               `}

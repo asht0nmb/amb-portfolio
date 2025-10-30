@@ -9,8 +9,9 @@ interface SectionTitleProps {
 export default function SectionTitle({ title }: SectionTitleProps) {
   return (
     <div className="w-full max-w-[85vw] mx-auto mb-12">
-      <Link 
-        href="/workspace" 
+      <Link
+        href="/workspace"
+        scroll={false}
         className="section-title inline-flex items-center gap-3"
       >
         <h2 className="text-sm uppercase tracking-widest text-gray-400/80">

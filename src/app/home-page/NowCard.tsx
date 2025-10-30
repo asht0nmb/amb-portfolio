@@ -51,8 +51,9 @@ export default function NowCard({ images = defaultImages }: NowCardProps) {
   };
 
   return (
-    <Link 
+    <Link
       href="/about"
+      scroll={false}
       className="block w-full transition-all duration-500 ease-out group"
     >
       <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-10 shadow-sm 

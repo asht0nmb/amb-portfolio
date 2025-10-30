@@ -31,22 +31,22 @@ export default function Footer() {
             <h3 className="font-medium text-lg mb-4">Pages</h3>
             <nav className="flex flex-col space-y-2">
               <div>
-                <Link href="/" className={getLinkClasses('/')}>
+                <Link href="/" scroll={false} className={getLinkClasses('/')}>
                   {isActive('/') && '/ '} Home
                 </Link>
               </div>
               <div>
-                <Link href="/about-page" className={getLinkClasses('/about-page')}>
+                <Link href="/about-page" scroll={false} className={getLinkClasses('/about-page')}>
                   {isActive('/about-page') && '/ '} About
                 </Link>
               </div>
               <div>
-                <Link href="/workspace-page" className={getLinkClasses('/workspace-page')}>
+                <Link href="/workspace-page" scroll={false} className={getLinkClasses('/workspace-page')}>
                   {isActive('/workspace-page') && '/ '} Workspace
                 </Link>
               </div>
               <div>
-                <Link href="/gallery-page" className={getLinkClasses('/gallery-page')}>
+                <Link href="/gallery-page" scroll={false} className={getLinkClasses('/gallery-page')}>
                   {isActive('/gallery-page') && '/ '} Gallery
                 </Link>
               </div>
