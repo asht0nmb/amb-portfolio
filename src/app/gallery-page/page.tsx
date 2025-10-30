@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getUserPhotos, getCollectionPhotos, UnsplashPhoto } from '@/lib/unsplash';
+import { getUserPhotos, getCollectionPhotos, getUserStats, UnsplashPhoto, UserStats } from '@/lib/unsplash';
 import GlassSurface from '@/components/ui/GlassSurface';
 
 // Choose one of these methods:
@@ -18,6 +18,7 @@ export default function GalleryPage() {
   const [photos, setPhotos] = useState<UnsplashPhoto[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [stats, setStats] = useState<UserStats | null>(null);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -48,8 +49,12 @@ export default function GalleryPage() {
         } else {
           console.log('Successfully fetched', fetchedPhotos.length, 'photos');
         }
-        
+
         setPhotos(fetchedPhotos);
+
+        // Fetch user stats
+        const userStats = await getUserStats(UNSPLASH_USERNAME);
+        setStats(userStats);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
         setError(`Error loading photos: ${errorMessage}`);
@@ -71,9 +76,24 @@ export default function GalleryPage() {
             <h1 className="text-4xl font-bold mb-3 flex-shrink-0">
               Some cool pics <a href="https://instagram.com/amb.usb" target="_blank" rel="noopener noreferrer" className="text-neutral-800 hover:text-neutral-600 transition-colors inline-flex">@amb.usb</a>
             </h1>
-            <p className="text-base text-neutral-600 font-light">
-              I love taking pictures
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-base text-neutral-600 font-light">
+                I love taking pictures
+              </p>
+              {stats?.views.total && (
+                <>
+                  <span className="text-neutral-300">|</span>
+                  <a
+                    href={`https://unsplash.com/@${UNSPLASH_USERNAME}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-neutral-500 hover:text-neutral-700 transition-colors"
+                  >
+                    {stats.views.total.toLocaleString()} views
+                  </a>
+                </>
+              )}
+            </div>
           </div>
           <div className="lg:col-start-3 text-sm text-neutral-500">
             <p className="font-medium">Panasonic</p>

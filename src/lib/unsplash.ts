@@ -33,6 +33,33 @@ export interface UnsplashPhoto {
   };
 }
 
+export interface UserStats {
+  downloads: {
+    total: number;
+    historical: {
+      change: number;
+      average: number;
+      values: Array<{ date: string; value: number }>;
+    };
+  };
+  views: {
+    total: number;
+    historical: {
+      change: number;
+      average: number;
+      values: Array<{ date: string; value: number }>;
+    };
+  };
+  likes: {
+    total: number;
+    historical: {
+      change: number;
+      average: number;
+      values: Array<{ date: string; value: number }>;
+    };
+  };
+}
+
 // Get photos from a specific user's profile
 export const getUserPhotos = async (username: string) => {
   try {
@@ -78,7 +105,7 @@ export const getCollectionPhotos = async (collectionId: string) => {
       perPage: 30,
       orientation: 'landscape'
     });
-    
+
     if (result.errors) {
       console.error('Error fetching collection photos:', result.errors[0]);
       return [];
@@ -99,10 +126,35 @@ export const getCollectionPhotos = async (collectionId: string) => {
         }
       })
     );
-    
+
     return photosWithExif;
   } catch (error) {
     console.error('Error fetching collection photos:', error);
     return [];
+  }
+};
+
+// Get user statistics (views, downloads, likes)
+export const getUserStats = async (username: string): Promise<UserStats | null> => {
+  try {
+    const response = await fetch(
+      `https://api.unsplash.com/users/${username}/statistics?quantity=30`,
+      {
+        headers: {
+          Authorization: `Client-ID ${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      console.error('Error fetching user stats:', response.statusText);
+      return null;
+    }
+
+    const data = await response.json();
+    return data as UserStats;
+  } catch (error) {
+    console.error('Error fetching user stats:', error);
+    return null;
   }
 }; 
