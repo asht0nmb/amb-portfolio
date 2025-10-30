@@ -158,7 +158,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
             finalX = 0;
           }
           gsap.set(inner, { x: startX, force3D: true });
-          if (colorFrom) (inner.style as any).color = colorFrom;
+          if (colorFrom) inner.style.color = colorFrom;
           inner.setAttribute('data-final-x', String(finalX));
           inner.setAttribute('data-start-x', String(startX));
           wrappersRef.current.push(wrap);
@@ -299,7 +299,8 @@ const Shuffle: React.FC<ShuffleProps> = ({
     colorTo,
     triggerOnce,
     respectReducedMotion,
-    triggerOnHover
+    triggerOnHover,
+    onShuffleComplete
   ]);
   const baseTw = 'inline whitespace-normal break-words will-change-transform';
   const commonStyle: React.CSSProperties = {
@@ -310,6 +311,6 @@ const Shuffle: React.FC<ShuffleProps> = ({
   };
   const classes = `${baseTw} ${ready ? 'visible' : 'invisible'} ${className}`.trim();
   const Tag = (tag || 'p') as keyof React.JSX.IntrinsicElements;
-  return React.createElement(Tag, { ref: ref as any, className: classes, style: commonStyle }, text);
+  return React.createElement(Tag, { ref: ref as React.RefObject<HTMLElement>, className: classes, style: commonStyle }, text);
 };
 export default Shuffle;
