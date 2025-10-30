@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { motion, LayoutGroup } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import LoadingSequence from '@/components/animations/LoadingSequence';
 import Shuffle from '@/components/text/Shuffle';
@@ -29,9 +29,7 @@ export default function SimpleHero() {
       {animated ? (
         <>
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            layoutId="ashton-text"
             className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6 leading-tight"
           >
             Ashton
@@ -138,14 +136,16 @@ export default function SimpleHero() {
   }
 
   return (
-    <>
+    <LayoutGroup>
+      {/* Loading sequence */}
       {!animationComplete && <LoadingSequence onComplete={handleLoadingComplete} />}
-      
+
+      {/* Hero - render as soon as loading completes to enable layoutId transition */}
       {animationComplete && (
         <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
           <HeroContent animated={true} />
         </div>
       )}
-    </>
+    </LayoutGroup>
   );
 }
