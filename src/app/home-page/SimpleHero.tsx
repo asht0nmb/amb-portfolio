@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import LoadingSequence from '@/components/animations/LoadingSequence';
+import Shuffle from '@/components/text/Shuffle';
 
 export default function SimpleHero() {
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -24,60 +25,103 @@ export default function SimpleHero() {
 
   // Hero content component
   const HeroContent = ({ animated = false }: { animated?: boolean }) => (
-    <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    <div className="relative z-10 px-6 max-w-lg mx-auto">
       {animated ? (
         <>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight"
+            className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6 leading-tight"
           >
-            Hi, I&apos;m
-            <br />
-            <span className="text-gray-900">
-              Ashton
-            </span>
+            Ashton
           </motion.h1>
-          
+
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            className="w-16 h-px bg-gray-300 mb-6"
+          />
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed"
+            className="text-2xl md:text-3xl text-gray-600 mb-12 leading-relaxed italic"
           >
-            Student, builder, photographer — exploring the intersection of business and technology
+            Always in{' '}
+            <Shuffle
+              text="motion"
+              tag="span"
+              shuffleDirection="right"
+              duration={0.5}
+              animationMode="evenodd"
+              shuffleTimes={2}
+              ease="power3.out"
+              stagger={0.05}
+              threshold={0.1}
+              triggerOnce={false}
+              triggerOnHover={true}
+              respectReducedMotion={true}
+              className="inline-block"
+              style={{
+                fontFamily: 'inherit',
+                fontSize: 'inherit',
+                fontStyle: 'inherit',
+                color: 'inherit'
+              }}
+            />
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 items-start"
           >
-            <div className="text-sm text-gray-500">University of Washington</div>
-            <div className="hidden sm:block w-1 h-1 bg-gray-300 rounded-full"></div>
-            <div className="text-sm text-gray-500">Seattle, WA</div>
+            <div className="text-xs text-gray-400">University of Washington</div>
+            <div className="hidden sm:block w-1 h-1 bg-gray-300 rounded-full mt-1.5"></div>
+            <div className="text-xs text-gray-400">Seattle, WA</div>
           </motion.div>
         </>
       ) : (
         <>
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            Hi, I&apos;m
-            <br />
-            <span className="text-gray-900">
-              Ashton
-            </span>
+          <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6 leading-tight">
+            Ashton
           </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Student, builder, photographer — exploring the intersection of business and technology
+
+          <div className="w-59 h-px bg-gray-300 mb-6" />
+
+          <p className="text-2xl md:text-3xl text-gray-600 mb-12 leading-relaxed italic">
+            Always in{' '}
+            <Shuffle
+              text="motion"
+              tag="span"
+              shuffleDirection="right"
+              duration={0.5}
+              animationMode="evenodd"
+              shuffleTimes={2}
+              ease="power3.out"
+              stagger={0.05}
+              threshold={0.1}
+              triggerOnce={false}
+              triggerOnHover={true}
+              respectReducedMotion={true}
+              className="inline-block"
+              style={{
+                fontFamily: 'inherit',
+                fontSize: 'inherit',
+                fontStyle: 'inherit',
+                color: 'inherit'
+              }}
+            />
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="text-sm text-gray-500">University of Washington</div>
-            <div className="hidden sm:block w-1 h-1 bg-gray-300 rounded-full"></div>
-            <div className="text-sm text-gray-500">Seattle, WA</div>
+
+          <div className="flex flex-col sm:flex-row gap-4 items-start">
+            <div className="text-xs text-gray-400">University of Washington</div>
+            <div className="hidden sm:block w-1 h-1 bg-gray-300 rounded-full mt-1.5"></div>
+            <div className="text-xs text-gray-400">Seattle, WA</div>
           </div>
         </>
       )}
