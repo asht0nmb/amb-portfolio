@@ -129,7 +129,7 @@ export default function SimpleHero() {
   // If skipping animation, show hero immediately
   if (skipAnimation) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+      <div className="relative min-h-screen flex items-center justify-center overflow-visible bg-white">
         <HeroContent />
       </div>
     );
@@ -142,7 +142,7 @@ export default function SimpleHero() {
 
       {/* Hero - render as soon as loading completes to enable layoutId transition */}
       {animationComplete && (
-        <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+        <div className="relative min-h-screen flex items-center justify-center overflow-visible bg-white">
           <HeroContent animated={true} />
         </div>
       )}

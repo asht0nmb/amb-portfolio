@@ -10,10 +10,9 @@ import ParallaxContainer from '@/components/animations/ParallaxContainer';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden">
-      <div className="flex flex-col">
-        {/* Hero Section */}
-        <SimpleHero />
+    <div className="flex flex-col">
+      {/* Hero Section */}
+      <SimpleHero />
         
         {/* Wave Transition between Hero and Content */}
         <div className="relative h-16 -mt-8 z-0">
@@ -86,7 +85,6 @@ export default function Home() {
             </StaggeredReveal>
           </SectionReveal>
         </div>
-      </div>
-    </main>
+    </div>
   );
 }
