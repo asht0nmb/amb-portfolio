@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useContext, useRef, createContext } from 'react';
+import { ReactNode, useContext, useRef } from 'react';
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
