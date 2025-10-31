@@ -102,39 +102,46 @@ export default function CustomCursor() {
   const detectInteractiveElement = useCallback((element: Element): boolean => {
     const interactiveTags = ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'LABEL'];
     const interactiveRoles = ['button', 'link', 'tab', 'menuitem', 'option'];
-    
-    // Check tag names
-    if (interactiveTags.includes(element.tagName)) return true;
-    
-    // Check ARIA roles
-    const role = element.getAttribute('role');
-    if (role && interactiveRoles.includes(role)) return true;
-    
-    // Check for event handlers
-    if (element.getAttribute('onclick') || 
-        element.getAttribute('onmousedown') ||
-        element.getAttribute('onkeydown')) return true;
-    
-    // Check CSS cursor property
-    const styles = window.getComputedStyle(element);
-    if (styles.cursor === 'pointer') return true;
-    
-    // Check for common interactive class patterns
-    const className = element.className;
-    if (typeof className === 'string') {
-      const classNames = className.toLowerCase();
-      if (classNames.includes('clickable') || 
-          classNames.includes('interactive') ||
-          classNames.includes('hover:') ||
-          classNames.includes('cursor-pointer') ||
-          classNames.includes('project-card') ||
-          classNames.includes('nav-link')) return true;
-    }
 
-    // Check for data attributes indicating interactivity
-    if (element.hasAttribute('data-clickable') ||
-        element.hasAttribute('data-interactive') ||
-        element.hasAttribute('tabindex')) return true;
+    let current = element;
+
+    // Traverse up the DOM tree to detect interactive elements
+    while (current && current !== document.body) {
+      // Check tag names
+      if (interactiveTags.includes(current.tagName)) return true;
+
+      // Check ARIA roles
+      const role = current.getAttribute('role');
+      if (role && interactiveRoles.includes(role)) return true;
+
+      // Check for event handlers
+      if (current.getAttribute('onclick') ||
+          current.getAttribute('onmousedown') ||
+          current.getAttribute('onkeydown')) return true;
+
+      // Check CSS cursor property
+      const styles = window.getComputedStyle(current);
+      if (styles.cursor === 'pointer') return true;
+
+      // Check for common interactive class patterns
+      const className = current.className;
+      if (typeof className === 'string') {
+        const classNames = className.toLowerCase();
+        if (classNames.includes('clickable') ||
+            classNames.includes('interactive') ||
+            classNames.includes('hover:') ||
+            classNames.includes('cursor-pointer') ||
+            classNames.includes('project-card') ||
+            classNames.includes('nav-link')) return true;
+      }
+
+      // Check for data attributes indicating interactivity
+      if (current.hasAttribute('data-clickable') ||
+          current.hasAttribute('data-interactive') ||
+          current.hasAttribute('tabindex')) return true;
+
+      current = current.parentElement as Element;
+    }
 
     return false;
   }, []);
@@ -196,16 +203,16 @@ export default function CustomCursor() {
     if (cursorState.isOverGlass) {
       const size = cursorState.isOverInteractive ? 'w-8 h-8' : 'w-6 h-6';
       const intensity = cursorState.glassIntensity;
-      
+
       let glassEffect;
       if (intensity > 0.7) {
-        glassEffect = 'bg-white/25 backdrop-blur-md border-2 border-white/40';
+        glassEffect = 'bg-white/25 backdrop-blur-md';
       } else if (intensity > 0.4) {
-        glassEffect = 'bg-white/20 backdrop-blur-sm border border-white/30';
+        glassEffect = 'bg-white/20 backdrop-blur-sm';
       } else {
-        glassEffect = 'bg-white/15 backdrop-blur-sm border border-white/20';
+        glassEffect = 'bg-white/15 backdrop-blur-sm';
       }
-      
+
       return [
         ...baseClasses,
         size,
@@ -223,7 +230,6 @@ export default function CustomCursor() {
         'w-6 h-6',
         'bg-blue-500/40',
         'rounded-full',
-        'border-2 border-blue-500/60',
         'shadow-md',
         'scale-110',
         'opacity-100',
@@ -241,12 +247,16 @@ export default function CustomCursor() {
   };
 
   const getTransform = () => {
-    const offsetX = cursorState.isOverGlass ? (cursorState.isOverInteractive ? -16 : -12) : 
-                   cursorState.isOverInteractive ? -12 : -8;
-    const offsetY = cursorState.isOverGlass ? (cursorState.isOverInteractive ? -16 : -12) : 
-                   cursorState.isOverInteractive ? -12 : -8;
-    
-    return `translate(${cursorState.x + offsetX}px, ${cursorState.y + offsetY}px)`;
+    // Calculate size-based offsets to center cursor properly
+    const size = cursorState.isOverGlass
+      ? (cursorState.isOverInteractive ? 32 : 24)
+      : cursorState.isOverInteractive
+        ? 24
+        : 16;
+
+    const offset = -size / 2;
+
+    return `translate(${cursorState.x + offset}px, ${cursorState.y + offset}px)`;
   };
 
   return (

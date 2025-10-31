@@ -78,7 +78,7 @@ export default function GalleryPage() {
             </h1>
             <div className="flex items-center gap-3">
               <p className="text-base text-neutral-600 font-light">
-                I love taking pictures
+                Love taking pictures
               </p>
               <span className="text-neutral-300">|</span>
               <a

@@ -94,24 +94,16 @@ export default function GlassNavBar() {
                   href={link.href}
                   scroll={false}
                   className={`
-                    text-sm font-medium transition-all duration-200 relative
-                    glass-focus fluid-transition
+                    text-sm font-medium transition-all duration-200
+                    hover:-translate-y-0.5 focus:outline-none
                     ${isActiveLink(link.href)
                       ? 'text-blue-600 font-semibold'
                       : 'text-neutral-700 hover:text-neutral-900'
                     }
                   `}
-
                   aria-current={isActiveLink(link.href) ? 'page' : undefined}
                 >
                   {link.name}
-                  {/* Active indicator */}
-                  {isActiveLink(link.href) && (
-                    <span
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-500 rounded-full"
-                      aria-hidden="true"
-                    />
-                  )}
                 </Link>
               ))}
             </div>
@@ -167,7 +159,8 @@ export default function GlassNavBar() {
               scroll={false}
               onClick={closeMenu}
               className={`
-                text-2xl font-medium transition-all duration-200 glass-focus
+                text-2xl font-medium transition-all duration-200
+                hover:-translate-y-1 focus:outline-none
                 ${isActiveLink(link.href)
                   ? 'text-blue-600 font-semibold'
                   : 'text-neutral-700 hover:text-neutral-900'
