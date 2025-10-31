@@ -6,6 +6,7 @@ import GlassNavBar from '@/components/layout/GlassNavBar';
 import Footer from '@/components/layout/Footer';
 import CustomCursor from '@/components/features/cursor/CustomCursor';
 import PageTransition from '@/components/transitions/PageTransition';
+import ScrollToTop from '@/components/navigation/ScrollToTop';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
+      <ScrollToTop />
       <CustomCursor />
       <GlassNavBar />
       <main className="flex-1">
