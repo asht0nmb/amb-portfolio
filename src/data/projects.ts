@@ -32,7 +32,7 @@ export const projects: Project[] = [
 
 The application features a custom 3-phase scheduling algorithm that combines quality matrix generation, constrained greedy optimization, and local search techniques to find optimal meeting times. Built with a mobile-first approach and integrated with Google Calendar for seamless workflow integration.`,
     hoverDetails: 'Smart scheduling with timezone fairness—coordinate 1:1 meetings across the globe without the back-and-forth.',
-    category: 'web',
+    category: 'Web',
     generalTags: ['Productivity', 'Full-Stack', 'Algorithm'],
     techTags: ['Next.js', 'Node.js', 'MongoDB', 'TypeScript', 'Google Calendar API'],
     status: 'shipped',
