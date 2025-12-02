@@ -4,7 +4,7 @@ export interface Project {
   shortDescription: string;
   fullDescription: string;
   hoverDetails?: string; // Custom text to show on card hover (different from modal description)
-  category: 'web' | 'data' | 'design' | 'ai' | 'case-study' | 'mobile' | 'other';
+  category: 'Web' | 'Data Science' | 'Design' | 'Analytics + ML' | 'case-study' | 'Mobile' | 'other';
   generalTags: string[];
   techTags: string[];
   status: 'in-progress' | 'shipped';
@@ -109,7 +109,7 @@ Built with privacy in mind, all data processing happens locally on the device, e
     shortDescription: 'Recimi, an app for sharing recipies',
     fullDescription: `"The best thing since sliced bread" - probably Martha Stuart's granddaughter`,
     hoverDetails: 'Coming soon',
-    category: 'mobile',
+    category: 'Mobile',
     generalTags: ['Consumer', 'Personal'],
     techTags: ['FastAPI', 'SwiftUI', 'PostgreSQL'], 
     status: 'in-progress',
@@ -140,7 +140,7 @@ Built with privacy in mind, all data processing happens locally on the device, e
 
 The site includes an integrated Unsplash photo gallery, custom cursor interactions, and smooth page transitions. Every detail has been carefully crafted to provide an engaging user experience while maintaining excellent performance.`,
     hoverDetails: 'Modern Next.js portfolio with glassmorphic design, smooth animations, and custom interactions.',
-    category: 'web',
+    category: 'Web',
     generalTags: ['Design', 'Personal'],
     techTags: ['Next.js', 'TypeScript', 'TailwindCSS', 'Framer Motion'],
     status: 'in-progress',
