@@ -61,7 +61,7 @@ export default function AboutSection() {
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   {/* Second paragraph if needed */}
-                  Currently studying Computer Science and Mathematics at the University of Washington, 
+                  Currently studying Informatics, Finance, and Mathematics at the University of Washington, 
                   building things that matter, and always looking for the next adventure.
                 </p>
               </motion.div>
@@ -88,7 +88,7 @@ export default function AboutSection() {
                 {/* Option 2: Placeholder until you have signature */}
                 <div className="h-full w-full flex items-center">
                   <span className="text-2xl font-handwriting text-gray-400 italic">
-                    — Ashton
+                    — amb
                   </span>
                 </div>
               </div>

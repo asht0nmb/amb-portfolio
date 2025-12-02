@@ -40,7 +40,7 @@ export default function AboutPage() {
                 <h3 className="text-xl text-gray-900 font-medium mb-1">Nudge</h3>
                 <p className="text-base text-gray-500 mb-3">R. H. Thaler & C. R. Sunstein</p>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Most recent read; audiobooks are the wave though
+                  Most recent read; audiobooks r the wave though
                 </p>
               </div>
             </div>
