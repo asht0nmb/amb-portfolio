@@ -44,7 +44,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[200]"
+            className="fixed inset-0 bg-white/90 backdrop-blur-lg z-[200]"
             onClick={onClose}
           />
 

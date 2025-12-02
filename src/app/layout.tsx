@@ -18,15 +18,21 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const devNote = 'Hope u have as much fun exploring the page as I had making it :)';
+  const htmlComment = { __html: `<!-- ${devNote} -->` };
+
   return (
-    <html lang="en" className={inter.className}>
-      <body className="min-h-screen flex flex-col" suppressHydrationWarning>
-        <ClientLayout>
-          {children}
-          <Analytics />
-          <SpeedInsights />
-        </ClientLayout>
-      </body>
-    </html>
+    <>
+      <script dangerouslySetInnerHTML={htmlComment} />
+      <html lang="en" className={inter.className}>
+        <body className="min-h-screen flex flex-col" suppressHydrationWarning>
+          <ClientLayout>
+            {children}
+            <Analytics />
+            <SpeedInsights />
+          </ClientLayout>
+        </body>
+      </html>
+    </>
   );
 }

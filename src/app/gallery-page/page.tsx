@@ -68,7 +68,7 @@ export default function GalleryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 pt-24">
+    <div className="min-h-screen w-full bg-[#faf9f6] pt-24">
       <div className="container mx-auto px-4 py-8 pt-24">
         {/* Header Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-7xl mx-auto">

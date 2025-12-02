@@ -2,7 +2,7 @@
 
 
 :root {
-  --background: #ffffff;
+  --background: #faf9f6;
   --foreground: #171717;
 
   /* Color Palette */
@@ -95,7 +95,7 @@
   --grid-gap: var(--space-6);
   --grid-gap-mobile: var(--space-4);
 
-  /* Glass/Fluid Theme Properties */
+  /* Glass/Fluid Theme Properties - KEEP FOR NAV */
   --glass-subtle: rgba(255, 255, 255, 0.05);
   --glass-standard: rgba(255, 255, 255, 0.1);
   --glass-prominent: rgba(255, 255, 255, 0.15);
@@ -104,34 +104,28 @@
   --glass-blur-mobile: 8px;
   --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
 
-  /* Fluid Animation Properties - Water-inspired cubic-bezier curves */
-  --ripple-duration: 2s;
-  --ripple-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Water-inspired easing curves */
-  --water-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);      /* Gentle water flow */
-  --water-splash: cubic-bezier(0.68, -0.55, 0.265, 1.55);    /* Water splash effect */
-  --water-ripple: cubic-bezier(0.34, 1.56, 0.64, 1);         /* Ripple expansion */
-  --water-settle: cubic-bezier(0.23, 1, 0.32, 1);            /* Water settling */
-  --water-surface: cubic-bezier(0.165, 0.84, 0.44, 1);       /* Surface tension */
-  --water-drop: cubic-bezier(0.76, 0, 0.24, 1);              /* Water drop fall */
-  
-  /* Legacy aliases for backward compatibility */
-  --liquid-spring: var(--water-ripple);
-  --water-flow: var(--water-gentle);
-  
-  /* Timing variables */
+  /* Timing variables - KEEP */
   --interaction-duration: 200ms;
   --transition-duration: 300ms;
   --ambient-duration: 2000ms;
   --hover-duration: 400ms;
   --focus-duration: 150ms;
 
-  /* Fluid Colors */
-  --water-blue: rgba(59, 130, 246, 0.3);
-  --ripple-white: rgba(255, 255, 255, 0.4);
-  --bubble-highlight: rgba(255, 255, 255, 0.6);
-  --accent-blue: var(--color-blue-500);
+  /* DEPRECATED - Water-themed variables - marked for removal */
+  /* --ripple-duration: 2s; */
+  /* --ripple-easing: cubic-bezier(0.4, 0, 0.2, 1); */
+  /* --water-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94); */
+  /* --water-splash: cubic-bezier(0.68, -0.55, 0.265, 1.55); */
+  /* --water-ripple: cubic-bezier(0.34, 1.56, 0.64, 1); */
+  /* --water-settle: cubic-bezier(0.23, 1, 0.32, 1); */
+  /* --water-surface: cubic-bezier(0.165, 0.84, 0.44, 1); */
+  /* --water-drop: cubic-bezier(0.76, 0, 0.24, 1); */
+  /* --liquid-spring: var(--water-ripple); */
+  /* --water-flow: var(--water-gentle); */
+  /* --water-blue: rgba(59, 130, 246, 0.3); */
+  /* --ripple-white: rgba(255, 255, 255, 0.4); */
+  /* --bubble-highlight: rgba(255, 255, 255, 0.6); */
+  /* --accent-blue: var(--color-blue-500); */
 
   /* Border Radius */
   --radius-sm: 8px;
@@ -155,16 +149,15 @@
   }
 }
 
-@keyframes water-ripple {
+/* DEPRECATED - Water-themed keyframes - marked for removal */
+/* @keyframes water-ripple {
   0% {
     transform: scale(0);
     opacity: 0.6;
   }
-
   50% {
     opacity: 0.3;
   }
-
   100% {
     transform: scale(4);
     opacity: 0;
@@ -176,22 +169,18 @@
     transform: scale(0);
     opacity: 0.4;
   }
-
   20% {
     opacity: 0.3;
   }
-
   50% {
     opacity: 0.15;
   }
-
   100% {
     transform: scale(8);
     opacity: 0;
   }
 }
 
-/* Advanced Water Background Animations */
 @keyframes water-wave-0 {
   0% {
     transform: scale(0.8) rotate(0deg) translateX(-20px);
@@ -312,7 +301,7 @@
   100% {
     background-position: 0% 50%;
   }
-}
+} */
 
 @keyframes fadeIn {
   from {
@@ -472,13 +461,13 @@
   }
 }
 
-/* Fluid Animation Utility Classes with Water-inspired Easing */
-.fluid-transition {
+/* DEPRECATED - Fluid Animation Utility Classes - marked for removal */
+/* .fluid-transition {
   transition: all var(--transition-duration) var(--water-gentle);
 }
 
 .fluid-hover {
-  transition: 
+  transition:
     transform var(--hover-duration) var(--water-surface),
     box-shadow var(--hover-duration) var(--water-settle),
     backdrop-filter var(--hover-duration) var(--water-gentle);
@@ -488,7 +477,6 @@
   transform: translateY(-2px) scale(1.02);
 }
 
-/* Specific water-inspired animation classes */
 .water-gentle-transition {
   transition: all var(--transition-duration) var(--water-gentle);
 }
@@ -512,7 +500,7 @@
 
 .water-drop-fall {
   transition: transform var(--interaction-duration) var(--water-drop);
-}
+} */
 
 /* Focus States for Accessibility */
 .glass-focus:focus {
@@ -536,13 +524,13 @@
   transform: translateY(-1px);
 }
 
-/* Water Background Utility Classes */
-.water-surface {
-  background: linear-gradient(45deg, 
-    rgba(59, 130, 246, 0.05) 0%, 
-    rgba(37, 99, 235, 0.03) 25%, 
-    rgba(29, 78, 216, 0.08) 50%, 
-    rgba(59, 130, 246, 0.02) 75%, 
+/* DEPRECATED - Water Background Utility Classes - marked for removal */
+/* .water-surface {
+  background: linear-gradient(45deg,
+    rgba(59, 130, 246, 0.05) 0%,
+    rgba(37, 99, 235, 0.03) 25%,
+    rgba(29, 78, 216, 0.08) 50%,
+    rgba(59, 130, 246, 0.02) 75%,
     rgba(37, 99, 235, 0.06) 100%);
   background-size: 400% 400%;
   animation: water-surface-flow 12s ease-in-out infinite;
@@ -554,7 +542,7 @@
 
 .water-glow {
   filter: url(#water-glow);
-}
+} */
 
 /* Performance-Optimized CSS Custom Properties */
 :root {
@@ -674,8 +662,8 @@
   will-change: transform, backdrop-filter;
 }
 
-/* Gradient utilities for water effects */
-.bg-gradient-radial {
+/* DEPRECATED - Water gradient and shadow utilities - marked for removal */
+/* .bg-gradient-radial {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
@@ -689,21 +677,20 @@
   );
 }
 
-/* Enhanced shadow effects for water */
 .shadow-water {
-  box-shadow: 
+  box-shadow:
     0 4px 20px rgba(59, 130, 246, 0.1),
     0 8px 40px rgba(37, 99, 235, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .shadow-water-deep {
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(59, 130, 246, 0.15),
     0 16px 64px rgba(37, 99, 235, 0.08),
     0 32px 128px rgba(29, 78, 216, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
+} */
 
 /* Scroll Animation Keyframes */
 @keyframes wave-flow {
@@ -1104,20 +1091,6 @@ body {
   }
 }
 
-/* Cursor Enhancement Utilities */
-.cursor-glass-aware {
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  contain: layout style paint;
-  will-change: transform, opacity;
-}
-
-.cursor-interactive-glow {
-  box-shadow: 
-    0 0 10px rgba(59, 130, 246, 0.4),
-    0 0 20px rgba(59, 130, 246, 0.2);
-  contain: layout style paint;
-}
 
 /* Memory-efficient glass effects */
 .memory-efficient-glass {

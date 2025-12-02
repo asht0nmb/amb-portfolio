@@ -56,29 +56,29 @@ export default function NowCard({ images = defaultImages }: NowCardProps) {
       scroll={false}
       className="block w-full transition-all duration-500 ease-out group"
     >
-      <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-10 shadow-sm 
-        transition-all duration-500 ease-out 
-        hover:shadow-xl hover:-translate-y-1 hover:bg-white/90
+      <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 sm:p-5 lg:p-6 shadow-lg
+        transition-all duration-300 ease-out
+        hover:shadow-2xl hover:-translate-y-1 hover:bg-white/90
         bg-gradient-to-br from-blue-50/50 to-transparent
-        min-h-[280px] sm:min-h-[320px] lg:min-h-[360px] overflow-hidden">
+        aspect-[8/8] overflow-hidden">
         <div className="flex flex-col h-full relative">
           <div className="flex-1 min-w-0 relative z-10 max-w-[60%]">
-            <div className="mb-4 sm:mb-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold mb-2 sm:mb-3 tracking-tight">Now</h2>
-              <p className="text-black/60 text-base sm:text-lg">
+            <div className="mb-3 sm:mb-4">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 tracking-tight">Now</h2>
+              <p className="text-black/60 text-xs sm:text-sm">
                 {"See what I'm up to at the moment"}
               </p>
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <span 
-                className="bg-blue-50 text-blue-600 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-sm font-medium
+              <span
+                className="bg-blue-50 text-blue-600 px-2 py-1 rounded-full text-xs font-medium
                   transition-colors duration-500 ease-out group-hover:bg-blue-100"
               >
                 Life
               </span>
-              <span 
-                className="bg-black/5 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-sm font-medium
+              <span
+                className="bg-black/5 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium
                   transition-colors duration-500 ease-out group-hover:bg-black/10"
               >
                 Updates

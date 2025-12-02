@@ -3,11 +3,19 @@
 import { motion, LayoutGroup } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import LoadingSequence from '@/components/animations/LoadingSequence';
-import Shuffle from '@/components/text/Shuffle';
+import RotatingText from '@/components/text/RotatingText';
 
 export default function SimpleHero() {
   const [animationComplete, setAnimationComplete] = useState(false);
   const [skipAnimation, setSkipAnimation] = useState(false);
+
+  // Rotating captions - add/edit these texts
+  const rotatingCaptions = [
+    "happy to be here",
+    "currently studying informatics, business, and math @ UW",
+    "probably (hopefully) on a mountain somewhere",
+    "prev @ micron technology, july ai"
+  ];
 
   useEffect(() => {
     // Check if user has visited before
@@ -25,114 +33,57 @@ export default function SimpleHero() {
 
   // Hero content component
   const HeroContent = ({ animated = false }: { animated?: boolean }) => (
-    <div className="relative z-10 px-6 max-w-lg mx-auto">
-      {animated ? (
-        <>
-          <motion.h1
-            layoutId="ashton-text"
-            className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6 leading-tight"
-          >
-            Ashton
-          </motion.h1>
+    <div className="min-h-[60vh] flex items-center justify-center px-6 bg-[#faf9f6] pt-16">
+      <div className="max-w-3xl mx-auto text-center">
+        {animated ? (
+          <>
+            <motion.h1
+              layoutId="ashton-text"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-black mb-6 text-center tracking-tight"
+            >
+              Ashton Meyer Bibbins
+            </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            className="w-16 h-px bg-gray-300 mb-6"
-          />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="text-base md:text-xl lg:text-2xl font-normal text-gray-700 max-w-3xl text-center mb-8 leading-relaxed"
+            >
+              I build things that matter to me, and share them here.
+            </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="text-2xl md:text-3xl text-gray-600 mb-12 leading-relaxed italic"
-          >
-            Always in{' '}
-            <Shuffle
-              text="motion"
-              tag="span"
-              shuffleDirection="right"
-              duration={0.5}
-              animationMode="evenodd"
-              shuffleTimes={2}
-              ease="power3.out"
-              stagger={0.05}
-              threshold={0.1}
-              triggerOnce={false}
-              triggerOnHover={true}
-              respectReducedMotion={true}
-              className="inline-block"
-              style={{
-                fontFamily: 'inherit',
-                fontSize: 'inherit',
-                fontStyle: 'inherit',
-                color: 'inherit'
-              }}
-            />
-          </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+              className="text-xs md:text-sm text-gray-500"
+            >
+              <RotatingText texts={rotatingCaptions} interval={4000} />
+            </motion.div>
+          </>
+        ) : (
+          <>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-black mb-6 text-center tracking-tight">
+              Ashton Meyer Bibbins
+            </h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 items-start"
-          >
-            <div className="text-xs text-gray-400">University of Washington</div>
-            <div className="hidden sm:block w-1 h-1 bg-gray-300 rounded-full mt-1.5"></div>
-            <div className="text-xs text-gray-400">Seattle, WA</div>
-          </motion.div>
-        </>
-      ) : (
-        <>
-          <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6 leading-tight">
-            Ashton
-          </h1>
+            <p className="text-base md:text-xl lg:text-2xl font-normal text-gray-700 max-w-3xl text-center mb-8 leading-relaxed">
+              I build things that matter to me, and share them here.
+            </p>
 
-          <div className="w-59 h-px bg-gray-300 mb-6" />
-
-          <p className="text-2xl md:text-3xl text-gray-600 mb-12 leading-relaxed italic">
-            Always in{' '}
-            <Shuffle
-              text="motion"
-              tag="span"
-              shuffleDirection="right"
-              duration={0.5}
-              animationMode="evenodd"
-              shuffleTimes={2}
-              ease="power3.out"
-              stagger={0.05}
-              threshold={0.1}
-              triggerOnce={false}
-              triggerOnHover={true}
-              respectReducedMotion={true}
-              className="inline-block"
-              style={{
-                fontFamily: 'inherit',
-                fontSize: 'inherit',
-                fontStyle: 'inherit',
-                color: 'inherit'
-              }}
-            />
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 items-start">
-            <div className="text-xs text-gray-400">University of Washington</div>
-            <div className="hidden sm:block w-1 h-1 bg-gray-300 rounded-full mt-1.5"></div>
-            <div className="text-xs text-gray-400">Seattle, WA</div>
-          </div>
-        </>
-      )}
+            <div className="text-xs md:text-sm text-gray-500">
+              <RotatingText texts={rotatingCaptions} interval={4000} />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 
   // If skipping animation, show hero immediately
   if (skipAnimation) {
-    return (
-      <div className="relative min-h-screen flex items-center justify-center overflow-visible bg-white">
-        <HeroContent />
-      </div>
-    );
+    return <HeroContent />;
   }
 
   return (
@@ -141,11 +92,7 @@ export default function SimpleHero() {
       {!animationComplete && <LoadingSequence onComplete={handleLoadingComplete} />}
 
       {/* Hero - render as soon as loading completes to enable layoutId transition */}
-      {animationComplete && (
-        <div className="relative min-h-screen flex items-center justify-center overflow-visible bg-white">
-          <HeroContent animated={true} />
-        </div>
-      )}
+      {animationComplete && <HeroContent animated={true} />}
     </LayoutGroup>
   );
 }
