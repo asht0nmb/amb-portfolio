@@ -24,7 +24,7 @@ export default function AboutSection() {
           >
             <div className="relative aspect-[4/5] rounded-xl overflow-hidden shadow-lg">
               <Image
-                src="/photos/mountain_headshot.png"
+                src="/photos/selfie.png"
                 alt="Handsome guy"
                 fill
                 className="object-cover"
@@ -62,7 +62,12 @@ export default function AboutSection() {
                 <p className="text-lg text-gray-700 leading-relaxed">
                   {/* Second paragraph if needed */}
                   Currently studying Informatics, Finance, and Mathematics at the University of Washington, 
-                  building things that matter, and always looking for the next adventure.
+                  building things that I think matter, and always looking for the another adventure.
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  {/* Your paragraph here */}
+                  
+                   
                 </p>
               </motion.div>
             </div>
@@ -88,7 +93,7 @@ export default function AboutSection() {
                 {/* Option 2: Placeholder until you have signature */}
                 <div className="h-full w-full flex items-center">
                   <span className="text-2xl font-handwriting text-gray-400 italic">
-                    — amb
+                    — AMB
                   </span>
                 </div>
               </div>
