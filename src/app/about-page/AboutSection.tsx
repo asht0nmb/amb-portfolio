@@ -69,8 +69,8 @@ export default function AboutSection() {
                   <p className="text-lg text-gray-700 leading-relaxed">
                     Currently I study Informatics, Finance, and Mathematics at the University 
                     of Washington, where I enjoy staying busy, and the occasional ferry ride home. 
-                    In the past two years I've worked across startups and large enterprises, and 
-                    while working takes up most of my time, I tend to love it. I'm always looking
+                    In the past two years I&apos;ve worked across startups and large enterprises, and
+                    while working takes up most of my time, I tend to love it. I&apos;m always looking
                     for the next adventure, so hmu, or find me on spotify.
                 </p>
               </motion.div>

@@ -2,8 +2,8 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import PhotoCard from './PhotoCard';
-import InteractiveAudioQuote from './InteractiveAudioQuote';
+import PhotoCard from '../../components/features/PhotoCard';
+import InteractiveAudioQuote from '../../components/features/InteractiveAudioQuote';
 
 interface Photo {
   id: string;
