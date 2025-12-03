@@ -57,17 +57,21 @@ export default function AboutSection() {
               >
                 <p className="text-lg text-gray-700 leading-relaxed">
                   {/* Your paragraph here */}
-                  &ldquo;A jack of all trades is a master of none, but better still than a master of one.&rdquo;
+                  &ldquo;A jack of all trades is a master of none, but oftentimes 
+                  better than a master of one.&rdquo;
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   {/* Second paragraph if needed */}
-                  Currently studying Informatics, Finance, and Mathematics at the University of Washington, 
-                  building things that I think matter, and always looking for the another adventure.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  {/* Your paragraph here */}
-                  
-                   
+                  The greatest ideas often come from the least expected places. It is my philosophy 
+                  that living life open to new experience, with a desire to explore and understand,
+                  is paramount to all success. 
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Currently I study Informatics, Finance, and Mathematics at the University 
+                    of Washington, where I enjoy staying busy, and the occasional ferry ride home. 
+                    In the past two years I've worked across startups and large enterprises, and 
+                    while working takes up most of my time, I tend to love it. I'm always looking
+                    for the next adventure, so hmu, or find me on spotify.
                 </p>
               </motion.div>
             </div>
@@ -78,7 +82,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-12 pt-8 border-t border-gray-200"
+              className=""
             >
               {/* Signature placeholder - replace src with your actual signature image */}
               <div className="h-16 w-48 relative opacity-80">

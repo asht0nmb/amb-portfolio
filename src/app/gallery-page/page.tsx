@@ -74,7 +74,7 @@ export default function GalleryPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-7xl mx-auto">
           <div className="md:col-span-2">
             <h1 className="text-4xl font-bold mb-3 flex-shrink-0">
-              Some cool pics <a href="https://instagram.com/amb.usb" target="_blank" rel="noopener noreferrer" className="text-neutral-800 hover:text-neutral-600 transition-colors inline-flex">@amb.usb</a>
+              Some cool pics <a href="https://imgs.so/ashton" target="_blank" rel="noopener noreferrer" className="text-neutral-800 hover:text-neutral-600 transition-colors inline-flex">@amb.usb</a>
             </h1>
             <div className="flex items-center gap-3">
               <p className="text-base text-neutral-600 font-light">

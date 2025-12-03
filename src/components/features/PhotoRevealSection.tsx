@@ -15,9 +15,9 @@ interface Photo {
 }
 
 const photos: Photo[] = [
-  { id: '1', src: '/photos/mountain_headshot.png', alt: 'Mountain headshot', caption: 'Snow summits in the summer', location: 'Banff, Alberta', year: 'Mar 2025' },
+  { id: '1', src: '/photos/moments/mountain_headshot.png', alt: 'Mountain headshot', caption: 'Snow summits in the summer', location: 'Banff, Alberta', year: 'Mar 2025' },
   { id: '3', src: '/photos/moments/running.png', alt: 'Seattle Marathon', caption: 'Morning (half) marathon', location: 'Seattle, WA', year: 'Nov 2025' },
-  { id: '2', src: '/photos/peak1.jpg', alt: 'Enjoying the mountains', caption: 'Lake 1 the Enchantments', location: 'North Cascades', year: 'June 2024' },
+  { id: '2', src: '/photos/peak1.jpg', alt: 'Enjoying the mountains', caption: 'Big advocate for the outdoors', location: 'North Cascades, WA', year: 'June 2024' },
   { id: '5', src: '/photos/moments/oranges.png', alt: 'City Streets', caption: 'Oranges oranges oranges', location: 'Stockholm, Sweden', year: 'Jul 2025' },
   { id: '6', src: '/photos/wave1.jpg', alt: 'Waterfall', caption: 'Water + photography', location: 'Kēōkea Bay, HI', year: 'Jan 2024' },
   { id: '4', src: '/photos/moments/downstairs_jazz.png', alt: 'Jazz Players', caption: 'Basement jazz', location: 'Shimokitazawa, Tokyo', year: 'Sep 2024' }
